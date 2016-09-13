@@ -89,6 +89,7 @@ point to the position of the join."
   (when (s-matches? (rx (+ (not space)))
                     (buffer-substring (line-beginning-position) (point)))
     (delete-horizontal-space t))
+  (company-abort)
   (insert ".")
   (company-complete))
 
@@ -111,3 +112,8 @@ point to the position of the join."
   "Yank to kill ring and print full type name at point to the minibuffer."
   (interactive)
   (ensime-type-at-point t t))
+
+(defun sbt-hydra ()
+  "Wrapper to rename sbt-hydra:hydra to sbt-hydra"
+  (interactive)
+  (sbt-hydra:hydra))

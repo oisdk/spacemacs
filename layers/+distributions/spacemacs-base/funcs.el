@@ -61,19 +61,6 @@
   (let ((message-log-max nil))
     (apply 'message msg args)))
 
-(defun spacemacs/jump-in-buffer ()
-  (interactive)
-  (call-interactively
-   (cond
-    ((and (configuration-layer/layer-usedp 'helm)
-          (eq major-mode 'org-mode))
-     'helm-org-in-buffer-headings)
-    ((configuration-layer/layer-usedp 'helm)
-     'helm-semantic-or-imenu)
-    ((configuration-layer/layer-usedp 'ivy)
-     'counsel-imenu)
-    (t 'imenu))))
-
 (defun spacemacs/split-and-new-line ()
   "Split a quoted string or s-expression and insert a new line with
 auto-indent."
@@ -82,7 +69,7 @@ auto-indent."
   (sp-newline))
 
 (defun spacemacs/push-mark-and-goto-beginning-of-line ()
-  "Push a mark at current location and go to the beginnign of the line."
+  "Push a mark at current location and go to the beginning of the line."
   (interactive)
   (push-mark (point))
   (evil-beginning-of-line))
@@ -93,21 +80,17 @@ auto-indent."
   (push-mark (point))
   (evil-end-of-line))
 
-;; insert one or several line below without changing current evil state
-(defun spacemacs/evil-insert-line-below (count)
-  "Insert one of several lines below the current point's line without changing
-the current state and point position."
-  (interactive "p")
-  (save-excursion
-    (evil-save-state (evil-open-below count))))
-
-;; insert one or several line above without changing current evil state
 (defun spacemacs/evil-insert-line-above (count)
-  "Insert one of several lines above the current point's line without changing
+  "Insert one or several lines above the current point's line without changing
 the current state and point position."
   (interactive "p")
-  (save-excursion
-    (evil-save-state (evil-open-above count))))
+  (dotimes (_ count) (save-excursion (evil-insert-newline-above))))
+
+(defun spacemacs/evil-insert-line-below (count)
+  "Insert one or several lines below the current point's line without changing
+the current state and point position."
+  (interactive "p")
+  (dotimes (_ count) (save-excursion (evil-insert-newline-below))))
 
 (defun spacemacs/evil-goto-next-line-and-indent (&optional count)
   (interactive "p")
@@ -233,9 +216,9 @@ automatically applied to."
 
 ;; from magnars modified by ffevotte for dedicated windows support
 (defun spacemacs/rotate-windows (count)
-  "Rotate your windows.
-Dedicated windows are left untouched. Giving a negative prefix
-argument takes the kindows rotate backwards."
+  "Rotate each window forwards.
+A negative prefix argument rotates each window backwards.
+Dedicated (locked) windows are left untouched."
   (interactive "p")
   (let* ((non-dedicated-windows (remove-if 'window-dedicated-p (window-list)))
          (num-windows (length non-dedicated-windows))
@@ -262,7 +245,8 @@ argument takes the kindows rotate backwards."
                (setq i next-i)))))))
 
 (defun spacemacs/rotate-windows-backward (count)
-  "Rotate your windows backward."
+  "Rotate each window backwards.
+Dedicated (locked) windows are left untouched."
   (interactive "p")
   (spacemacs/rotate-windows (* -1 count)))
 
@@ -522,7 +506,7 @@ If the universal prefix argument is used then will the windows too."
   (delete-other-windows)
   (split-window-right))
 
-(defalias 'spacemacs/home 'spacemacs-buffer/goto-buffer
+(defalias 'spacemacs/home 'spacemacs-buffer/refresh
   "Go to home Spacemacs buffer")
 
 (defun spacemacs/home-delete-other-windows ()
@@ -533,6 +517,7 @@ Useful for making the home buffer the only visible buffer in the frame."
   (delete-other-windows))
 
 (defun spacemacs/insert-line-above-no-indent (count)
+  "Insert a new line above with no indentation."
   (interactive "p")
   (let ((p (+ (point) count)))
     (save-excursion
@@ -547,7 +532,7 @@ Useful for making the home buffer the only visible buffer in the frame."
     (goto-char p)))
 
 (defun spacemacs/insert-line-below-no-indent (count)
-  "Insert a new line below with no identation."
+  "Insert a new line below with no indentation."
   (interactive "p")
   (save-excursion
     (evil-move-end-of-line)
@@ -709,19 +694,27 @@ current window."
   "Return the line at point as a string."
   (buffer-substring (line-beginning-position) (line-end-position)))
 
-(defun spacemacs/open-in-external-app ()
-  "Open current file in external application."
-  (interactive)
-  (let ((file-path (if (eq major-mode 'dired-mode)
-                       (dired-get-file-for-visit)
-                     (buffer-file-name))))
-    (if file-path
-        (cond
-         ((spacemacs/system-is-mswindows) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path)))
-         ((spacemacs/system-is-mac) (shell-command (format "open \"%s\"" file-path)))
-         ((spacemacs/system-is-linux) (let ((process-connection-type nil))
-                              (start-process "" nil "xdg-open" file-path))))
-      (message "No file associated to this buffer."))))
+(defun spacemacs//open-in-external-app (file-path)
+  "Open `file-path' in external application."
+  (cond
+   ((spacemacs/system-is-mswindows) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path)))
+   ((spacemacs/system-is-mac) (shell-command (format "open \"%s\"" file-path)))
+   ((spacemacs/system-is-linux) (let ((process-connection-type nil))
+                                  (start-process "" nil "xdg-open" file-path)))))
+
+(defun spacemacs/open-file-or-directory-in-external-app (arg)
+  "Open current file in external application.
+If the universal prefix argument is used then open the folder
+containing the current file by the default explorer."
+  (interactive "P")
+  (if arg
+      (spacemacs//open-in-external-app (expand-file-name default-directory))
+    (let ((file-path (if (derived-mode-p 'dired-mode)
+                         (dired-get-file-for-visit)
+                       buffer-file-name)))
+      (if file-path
+          (spacemacs//open-in-external-app file-path)
+        (message "No file associated to this buffer.")))))
 
 (defun spacemacs/switch-to-minibuffer-window ()
   "switch to minibuffer window (if active)"
@@ -756,10 +749,14 @@ If JUSTIFY-RIGHT is non nil justify to the right instead of the
 left. If AFTER is non-nil, add whitespace to the left instead of
 the right."
   (interactive "r\nsAlign regexp: ")
-  (let ((complete-regexp (if after
-                             (concat regexp "\\([ \t]*\\)")
-                           (concat "\\([ \t]*\\)" regexp)))
-        (group (if justify-right -1 1)))
+  (let* ((ws-regexp (if (string-empty-p regexp)
+                        "\\(\\s-+\\)"
+                      "\\(\\s-*\\)"))
+         (complete-regexp (if after
+                              (concat regexp ws-regexp)
+                            (concat ws-regexp regexp)))
+         (group (if justify-right -1 1)))
+    (message "%S" complete-regexp)
     (align-regexp start end complete-regexp group 1 t)))
 
 ;; Modified answer from http://emacs.stackexchange.com/questions/47/align-vertical-columns-of-numbers-on-the-decimal-point

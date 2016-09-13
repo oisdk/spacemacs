@@ -11,10 +11,32 @@
 
 
 
+(defvar spacemacs--helm-popwin-mode nil
+  "Temp variable to store `popwin-mode''s value.")
+
 (defun spacemacs//helm-cleanup ()
   "Cleanup some helm related states when quitting."
   ;; deactivate any running transient map (transient-state)
   (setq overriding-terminal-local-map nil))
+
+(defun spacemacs//helm-prepare-display ()
+  "Prepare necessary settings to make Helm display properly."
+  (setq spacemacs-display-buffer-alist display-buffer-alist)
+  ;; the only buffer to display is Helm, nothing else we must set this
+  ;; otherwise Helm cannot reuse its own windows for copyinng/deleting
+  ;; etc... because of existing popwin buffers in the alist
+  (setq display-buffer-alist nil)
+  (setq spacemacs--helm-popwin-mode popwin-mode)
+  (when popwin-mode
+    (popwin-mode -1)))
+
+(defun spacemacs//helm-restore-display ()
+  ;; we must enable popwin-mode first then restore `display-buffer-alist'
+  ;; Otherwise, popwin keeps adding up its own buffers to
+  ;; `display-buffer-alist' and could slow down Emacs as the list grows
+  (when spacemacs--helm-popwin-mode
+    (popwin-mode))
+  (setq display-buffer-alist spacemacs-display-buffer-alist))
 
 
 ;; REPLs integration
@@ -156,6 +178,14 @@ Ensure that helm is required before calling FUNC."
   "Exits helm, opens a dired buffer and immediately switches to editable mode."
   (interactive)
   (helm-exit-and-execute-action 'spacemacs//helm-find-files-edit))
+
+(defun spacemacs/helm-jump-in-buffer ()
+  "Jump in buffer using `imenu' facilities and helm."
+  (interactive)
+  (call-interactively
+   (cond
+    ((eq major-mode 'org-mode) 'helm-org-in-buffer-headings)
+    (t 'helm-semantic-or-imenu))))
 
 
 ;; Generalized next-error interface

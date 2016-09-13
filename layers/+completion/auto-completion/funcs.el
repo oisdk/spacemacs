@@ -88,6 +88,7 @@
 (defvar spacemacs--auto-completion-complete-last-candidate nil)
 (defvar spacemacs--auto-completion-shadowed-insert-binding nil)
 (defvar spacemacs--auto-completion-shadowed-emacs-binding nil)
+(defvar spacemacs--auto-completion-shadowed-hybrid-binding nil)
 
 (defun spacemacs//auto-completion-key-sequence-start ()
   "Initiate auto-completion sequence."
@@ -104,12 +105,18 @@
           (lookup-key evil-insert-state-map second-key))
     (setq spacemacs--auto-completion-shadowed-emacs-binding
           (lookup-key evil-emacs-state-map second-key))
+    (setq spacemacs--auto-completion-shadowed-hybrid-binding
+          (lookup-key evil-hybrid-state-map second-key))
     (define-key
       evil-insert-state-map
       second-key
       'spacemacs//auto-completion-key-sequence-end)
     (define-key
       evil-emacs-state-map
+      second-key
+      'spacemacs//auto-completion-key-sequence-end)
+    (define-key
+      evil-hybrid-state-map
       second-key
       'spacemacs//auto-completion-key-sequence-end))
   ;; set a timer to restore the old bindings
@@ -149,7 +156,11 @@
     (define-key
       evil-emacs-state-map
       second-key
-      spacemacs--auto-completion-shadowed-emacs-binding)))
+      spacemacs--auto-completion-shadowed-emacs-binding)
+    (define-key
+      evil-hybrid-state-map
+      second-key
+      spacemacs--auto-completion-shadowed-hybrid-binding)))
 
 
 ;; Editing style
@@ -163,7 +174,9 @@
     (let ((map company-active-map))
       (define-key map (kbd "C-j") 'company-select-next)
       (define-key map (kbd "C-k") 'company-select-previous)
-      (define-key map (kbd "C-l") 'company-complete-selection)))
+      (define-key map (kbd "C-l") 'company-complete-selection))
+    (when (require 'company-quickhelp nil 'noerror)
+      (evil-define-key 'insert company-quickhelp-mode-map (kbd "C-k") 'company-select-previous)))
    (t
     (let ((map company-active-map))
       (define-key map (kbd "C-n") 'company-select-next)
@@ -220,3 +233,39 @@
   (interactive)
   (call-interactively 'aya-expand)
   (unless holy-mode (evil-insert-state)))
+
+
+;; Yasnippet and Smartparens
+
+;; If enabled, smartparens will mess snippets expanded by `hippie-expand`.
+;; We want to temporarily disable Smartparens during the snippet expansion and
+;; switch it back to the initial state when done.
+;;
+;; However, there is an asymmetry in Yasnippet's hooks:
+;; * `yas-before-expand-snippet-hook' is called for all snippet expansions,
+;; including the nested ones.
+;; * `yas-after-exit-snippet-hook' is called only for the top level snippet,
+;; but NOT for the nested ones.
+;;
+;; That's why we introduce `spacemacs--yasnippet-expanding' below.
+
+(defvar spacemacs--smartparens-enabled-initially t
+  "Stored whether smartparens is originally enabled or not.")
+(defvar spacemacs--yasnippet-expanding nil
+  "Whether the snippet expansion is in progress.")
+
+(defun spacemacs//smartparens-disable-before-expand-snippet ()
+  "Handler for `yas-before-expand-snippet-hook'.
+Disable smartparens and remember its initial state."
+  ;; Remember the initial smartparens state only once, when expanding a top-level snippet.
+  (unless spacemacs--yasnippet-expanding
+    (setq spacemacs--yasnippet-expanding t
+          spacemacs--smartparens-enabled-initially smartparens-mode))
+  (smartparens-mode -1))
+
+(defun spacemacs//smartparens-restore-after-exit-snippet ()
+  "Handler for `yas-after-exit-snippet-hook'.
+ Restore the initial state of smartparens."
+  (setq spacemacs--yasnippet-expanding nil)
+  (when spacemacs--smartparens-enabled-initially
+    (smartparens-mode 1)))

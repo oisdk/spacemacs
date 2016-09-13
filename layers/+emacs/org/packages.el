@@ -509,7 +509,7 @@ Headline^^            Visit entry^^               Filter^^                    Da
     (progn
       (spacemacs/set-leader-keys
         "aop" 'org-projectile/capture
-        "aoP" 'org-projectile/goto-todos)
+        "po" 'org-projectile/goto-todos)
       (with-eval-after-load 'org-capture
         (require 'org-projectile)))
     :config
@@ -532,4 +532,7 @@ Headline^^            Visit entry^^               Filter^^                    Da
   (spacemacs|define-custom-layout "@Org"
     :binding "o"
     :body
-    (find-file (first (org-agenda-files)))))
+    (let ((agenda-files (org-agenda-files)))
+      (if agenda-files
+          (find-file (first agenda-files))
+        (user-error "Error: No agenda files configured, nothing to display.")))))
