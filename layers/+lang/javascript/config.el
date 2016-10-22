@@ -13,7 +13,9 @@
 
 (spacemacs|defvar-company-backends js2-mode)
 
+(spacemacs|define-jump-handlers js2-mode)
 
+<<<<<<< HEAD
 (setq javascript/key-binding-prefixes '(("mh" . "documentation")
                                         ("mg" . "goto")
                                         ("mr" . "refactor")))
@@ -21,5 +23,7 @@
                    'js2-mode (car x) (cdr x)))
       javascript/key-binding-prefixes)
 
+=======
+>>>>>>> syl20bnr/master
 (defvar javascript-disable-tern-port-files t
   "Stops tern from creating tern port files.")

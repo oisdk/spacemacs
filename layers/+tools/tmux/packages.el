@@ -8,7 +8,22 @@
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
+<<<<<<< HEAD
 (setq tmux-packages '((tmux :location local)))
+=======
+(setq tmux-packages
+      '(
+        golden-ratio
+        (tmux :location local)
+        ))
+
+(defun tmux/post-init-golden-ratio ()
+  (with-eval-after-load 'golden-ratio
+    (add-to-list 'golden-ratio-extra-commands 'tmux-nav-left)
+    (add-to-list 'golden-ratio-extra-commands 'tmux-nav-right)
+    (add-to-list 'golden-ratio-extra-commands 'tmux-nav-up)
+    (add-to-list 'golden-ratio-extra-commands 'tmux-nav-down)))
+>>>>>>> syl20bnr/master
 
 (defun tmux/init-tmux ()
   "Initialize tmux"

@@ -35,13 +35,19 @@ tmp/
 .python-environments/
 server/
 /network-security.data
+<<<<<<< HEAD
 *~
+=======
+>>>>>>> syl20bnr/master
 *.elc
 *.pyc
 /*.zip
 *.db
 python-*-docs-html
 /.cask/
+/session.*
+/srecode-map.el
+/recentf
 
 # Private directory
 private/
