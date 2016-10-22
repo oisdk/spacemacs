@@ -164,22 +164,20 @@ To permanently enable mode line display of org clock, add this snippet to your
 * Key bindings
 ** Org
 
-| Key Binding   | Description                    |
-|---------------+--------------------------------|
-| ~SPC a o #~   | org agenda list stuck projects |
-| ~SPC a o /~   | org occur in agenda files      |
-| ~SPC a o a~   | org agenda list                |
-| ~SPC a o c~   | org capture                    |
-| ~SPC a o e~   | org store agenda views         |
-| ~SPC a o k i~ | org clock in last              |
-| ~SPC a o k j~ | org jump to current clock      |
-| ~SPC a o k o~ | org clock out                  |
-| ~SPC a o l~   | org store link                 |
-| ~SPC a o m~   | org tags view                  |
-| ~SPC a o o~   | org agenda                     |
-| ~SPC a o s~   | org search view                |
-| ~SPC a o t~   | org todo list                  |
-| ~SPC C c~     | org-capture                    |
+| Key Binding | Description                    |
+|-------------+--------------------------------|
+| ~SPC a o #~ | org agenda list stuck projects |
+| ~SPC a o /~ | org occur in agenda files      |
+| ~SPC a o a~ | org agenda list                |
+| ~SPC a o c~ | org capture                    |
+| ~SPC a o e~ | org store agenda views         |
+| ~SPC a o l~ | org store link                 |
+| ~SPC a o m~ | org tags view                  |
+| ~SPC a o o~ | org agenda                     |
+| ~SPC a o O~ | org clock out                  |
+| ~SPC a o s~ | org search view                |
+| ~SPC a o t~ | org todo list                  |
+| ~SPC C c~   | org-capture                    |
 
 ** Org with evil-org-mode
 
@@ -353,7 +351,7 @@ conventions.
 | ~SPC m c~                                    | confirm                                |
 | ~SPC m a~                                    | abort                                  |
 | ~SPC m k~                                    | abort                                  |
-| ~SPC m R~                                    | org-capture-refile in org-capture-mode |
+| ~SPC m r~                                    | org-capture-refile in org-capture-mode |
 
 ** Org agenda
 
@@ -371,8 +369,8 @@ The evilified org agenda supports the following bindings:
 | ~SPC m O~            | org-agenda-clock-out              |
 | ~SPC m p~            | org-pomodoro (if package is used) |
 | ~SPC m P~            | org-agenda-set-property           |
-| ~SPC m R~            | org-agenda-refile                 |
-| ~SPC m q~            | org-agenda-clock-cancel           |
+| ~SPC m q~            | org-agenda-refile                 |
+| ~SPC m Q~            | org-agenda-clock-cancel           |
 | ~SPC m s~            | org-agenda-schedule               |
 | ~M-j~                | next item                         |
 | ~M-k~                | previous item                     |
@@ -396,9 +394,9 @@ are listed bellow.
 |-------------+---------------------+-----------------------------------|
 | ~ht~        | set status          | org-agenda-todo                   |
 | ~hk~        | kill                | org-agenda-kill                   |
-| ~hR~       | refile              | org-agenda-refile                 |
+| ~hr~        | refile              | org-agenda-refile                 |
 | ~hA~        | archive             | org-agenda-archive-default        |
-| ~h:~        | set tags            | org-agenda-set-tags               |
+| ~hT~        | set tags            | org-agenda-set-tags               |
 | ~hp~        | set priority        | org-agenda-priority               |
 |-------------+---------------------+-----------------------------------|
 | Visit entry |                     |                                   |
@@ -446,9 +444,9 @@ are listed bellow.
 |-------------+---------------------+-----------------------------------|
 | Clock       |                     |                                   |
 |-------------+---------------------+-----------------------------------|
-| ~cI~        | in                  | org-agenda-clock-in               |
-| ~cO~        | out                 | org-agenda-clock-out              |
-| ~cq~        | cancel              | org-agenda-clock-cancel           |
+| ~ci~        | in                  | org-agenda-clock-in               |
+| ~co~        | out                 | org-agenda-clock-out              |
+| ~ck~        | cancel              | org-agenda-clock-cancel           |
 | ~cj~        | jump                | org-agenda-clock-goto             |
 |-------------+---------------------+-----------------------------------|
 | Other       |                     |                                   |
