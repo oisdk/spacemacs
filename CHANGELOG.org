@@ -120,7 +120,11 @@
 - Improve search of nearest file in compilation database (thanks to deb0ch)
 ** 0.200.2 (2016/10/14)
 *** Fixes
+<<<<<<< HEAD
 -  Fix compatibility with the =xterm-color= package (thanks to bixuanzju)
+=======
+- Fix compatibility with the =xterm-color= package (thanks to bixuanzju)
+>>>>>>> syl20bnr/develop
 ** 0.200.1 (2016/10/09)
 *** Fixes
 - Restore missing support for custom Evil ex command key via the new

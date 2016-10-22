@@ -414,11 +414,19 @@ The message is displayed only if `init-file-debug' is non nil."
   "List of warnings during startup.")
 
 (defun spacemacs-buffer/warning (msg &rest args)
+<<<<<<< HEAD
   "Display MSG as a warning message but in buffer `*Messages*'.
 The message is always displayed. "
   (let ((msg (apply 'format msg args)))
     (message "(Spacemacs) Warning: %s" msg)
     (add-to-list 'spacemacs-buffer--warnings msg 'append)))
+=======
+  "Display MSG as a warning message but in buffer `*Messages*'."
+  (let ((msg (apply 'format msg args)))
+    (message "(Spacemacs) Warning: %s" msg)
+    (when message-log-max
+      (add-to-list 'spacemacs-buffer--warnings msg 'append))))
+>>>>>>> syl20bnr/develop
 
 (defun spacemacs-buffer/insert-page-break ()
   "Insert a page break line in spacemacs buffer."
