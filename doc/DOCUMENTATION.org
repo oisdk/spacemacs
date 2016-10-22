@@ -1965,6 +1965,7 @@ Buffer manipulation commands (start with ~b~):
 | ~SPC u SPC b d~ | kill the current buffer and window (does not delete the visited file)    |
 | ~SPC b D~       | kill a visible buffer using [[https://github.com/abo-abo/ace-window][ace-window]]                                   |
 | ~SPC u SPC b D~ | kill a visible buffer and its window using [[https://github.com/abo-abo/ace-window][ace-window]]                    |
+| ~SPC b C-d~     | kill buffers using a regular expression                                  |
 | ~SPC b e~       | erase the content of the buffer (ask for confirmation)                   |
 | ~SPC b h~       | open =*spacemacs*= home buffer                                           |
 | ~SPC b n~       | switch to next buffer avoiding special buffers                           |
@@ -2519,9 +2520,8 @@ be pasted, pressing ~p~ again will replace =bar= with =foo=.
 | Key Binding   | Description                                                                   |
 |---------------+-------------------------------------------------------------------------------|
 | ~p~ or ~P~    | paste the text before or after point and initiate the =paste= transient state |
-| ~p~           | in transient state: replace paste text with the previously copied one         |
-| ~P~           | in transient state: replace paste text with the next copied one               |
-| ~.~           | paste the same text and leave the transient state                             |
+| ~C-j~         | in transient state: replace paste text with the previously copied one         |
+| ~C-k~         | in transient state: replace paste text with the next copied one               |
 | Any other key | leave the transient state                                                     |
 
 **** Auto-indent pasted text
@@ -2814,6 +2814,7 @@ Comments are handled by [[https://github.com/redguardtoo/evil-nerd-commenter][ev
 | Key Binding | Description               |
 |-------------+---------------------------|
 | ~SPC ;~     | comment operator          |
+| ~SPC c h~   | hide/show comments        |
 | ~SPC c l~   | comment lines             |
 | ~SPC c L~   | invert comment lines      |
 | ~SPC c p~   | comment paragraphs        |
@@ -3178,31 +3179,31 @@ with ~SPC SPC spacemacs/recompile-elpa~.
 | [[https://github.com/syl20bnr/spacemacs/pull/4089][2000th pull request]] | [[https://github.com/channingwalton][channingwalton]] |
 | [[https://github.com/syl20bnr/spacemacs/pull/6338][3000th pull request]] | [[https://github.com/darkfeline][darkfeline]]     |
 
-
 ** Stars, forks and watchers
 
-| Achievements        | Account         |
-|---------------------+-----------------|
-| 100th watcher       | [[https://github.com/adouzzy][adouzzy]]         |
-| 100th fork          | [[https://github.com/balajisivaraman][balajisivaraman]] |
-| 200th fork          | [[https://github.com/alcol80][alcol80]]         |
-| 300th fork          | [[https://github.com/mlopes][mlopes]]          |
-| 2000th fork         | [[https://github.com/Gameguykiler][Gameguykiler]]    |
-| 100th star          | [[https://github.com/Jackneill][Jackneill]]       |
-| 200th star          | [[https://github.com/jb55][jb55]]            |
-| 400th star          | [[https://github.com/dbohdan][dbohdan]]         |
-| 600th star          | [[https://github.com/laat][laat]]            |
-| 700th star          | [[https://github.com/kendall][kendall]]         |
-| 800th star          | [[https://github.com/urso][urso]]            |
-| 900th star          | [[https://github.com/luisgerhorst][luisgerhorst]]    |
-| 1000th star!        | [[https://github.com/rashly][rashly]]          |
-| 2000th star!!       | [[https://github.com/stshine][stshine]]         |
-| 3000th star!!!      | [[https://github.com/TheBB][TheBB]]           |
-| 4000th star!!!!     | [[https://github.com/nixmaniack][nixmaniack]]      |
-| 5000th star!!!!!    | [[https://github.com/StreakyCobra][StreakyCobra]]    |
-| 6000th star!!!!!!   | [[https://github.com/NJBS][NJBS]]            |
-| 7000th star!!!!!!!  | [[https://github.com/mukhali][mukhali]]         |
-| 8000th star!!!!!!!! | [[https://github.com/shsteven][shsteven]]        |
+| Achievements         | Account         |
+|----------------------+-----------------|
+| 100th watcher        | [[https://github.com/adouzzy][adouzzy]]         |
+| 100th fork           | [[https://github.com/balajisivaraman][balajisivaraman]] |
+| 200th fork           | [[https://github.com/alcol80][alcol80]]         |
+| 300th fork           | [[https://github.com/mlopes][mlopes]]          |
+| 2000th fork          | [[https://github.com/Gameguykiler][Gameguykiler]]    |
+| 100th star           | [[https://github.com/Jackneill][Jackneill]]       |
+| 200th star           | [[https://github.com/jb55][jb55]]            |
+| 400th star           | [[https://github.com/dbohdan][dbohdan]]         |
+| 600th star           | [[https://github.com/laat][laat]]            |
+| 700th star           | [[https://github.com/kendall][kendall]]         |
+| 800th star           | [[https://github.com/urso][urso]]            |
+| 900th star           | [[https://github.com/luisgerhorst][luisgerhorst]]    |
+| 1000th star!         | [[https://github.com/rashly][rashly]]          |
+| 2000th star!!        | [[https://github.com/stshine][stshine]]         |
+| 3000th star!!!       | [[https://github.com/TheBB][TheBB]]           |
+| 4000th star!!!!      | [[https://github.com/nixmaniack][nixmaniack]]      |
+| 5000th star!!!!!     | [[https://github.com/StreakyCobra][StreakyCobra]]    |
+| 6000th star!!!!!!    | [[https://github.com/NJBS][NJBS]]            |
+| 7000th star!!!!!!!   | [[https://github.com/mukhali][mukhali]]         |
+| 8000th star!!!!!!!!  | [[https://github.com/shsteven][shsteven]]        |
+| 9000th star!!!!!!!!! | [[https://github.com/deb0ch][deb0ch]]          |
 
 ** Gitter chat
 

@@ -126,6 +126,9 @@ whenever you start Emacs.")
 (defvar dotspacemacs-configuration-layers '(emacs-lisp)
   "List of configuration layers to load.")
 
+(defvar dotspacemacs--configuration-layers-saved nil
+  "Saved value of `dotspacemacs-configuration-layers' after sync.")
+
 (defvar dotspacemacs-themes '(spacemacs-dark
                               spacemacs-light)
   "List of themes, the first of the list is loaded when spacemacs starts.
@@ -147,6 +150,9 @@ pressing `<leader> m`. Set it to `nil` to disable it.")
 
 (defvar dotspacemacs-major-mode-emacs-leader-key "C-M-m"
   "Major mode leader key accessible in `emacs state' and `insert state'")
+
+(defvar dotspacemacs-ex-command-key ":"
+  "The key used for Vim Ex commands.")
 
 (defvar dotspacemacs-command-key "SPC"
   "The key used for Emacs commands (M-x) (after pressing on the leader key).")
@@ -229,6 +235,10 @@ Default value is `cache'.")
 (defvar dotspacemacs-enable-paste-transient-state t
   "If non nil the paste transient-state is enabled. While enabled pressing `p`
 several times cycle between the kill ring content.'")
+(defvaralias
+  'dotspacemacs-enable-paste-micro-state
+  'dotspacemacs-enable-paste-transient-state
+  "Old name of `dotspacemacs-enable-paste-transient-state'.")
 
 (defvar dotspacemacs-which-key-delay 0.4
   "Delay in seconds starting from the last keystroke after which
@@ -355,6 +365,16 @@ are caught and signalled to user in spacemacs buffer."
                                            (error-message-string err))
                                    t))))))
 
+(defun dotspacemacs//check-layers-changed ()
+  "Check if the value of `dotspacemacs-configuration-layers'
+changed, and issue a warning if it did."
+  (unless (eq dotspacemacs-configuration-layers
+              dotspacemacs--configuration-layers-saved)
+    (spacemacs-buffer/warning
+     "`dotspacemacs-configuration-layers' was changed outside of `dotspacemacs/layers'.")))
+(add-hook 'spacemacs-post-user-config-hook
+          'dotspacemacs//check-layers-changed)
+
 (defun dotspacemacs//read-editing-style-config (config)
   "Read editing style CONFIG: apply variables and return the editing style.
 CONFIG can be the symbol of an editing style or a list where the car is
@@ -459,7 +479,7 @@ before copying the file if the destination already exists."
   (interactive)
   (let* ((copy? (if (file-exists-p dotspacemacs-filepath)
                     (y-or-n-p
-                     (format "%s already exists. Do you want to overwite it ? "
+                     (format "%s already exists. Do you want to overwrite it ? "
                              dotspacemacs-filepath)) t)))
     (when copy?
       (copy-file (concat dotspacemacs-template-directory
@@ -522,7 +542,7 @@ If ARG is non nil then Ask questions to the user before installing the dotfile."
       (let ((install
              (if (file-exists-p dotspacemacs-filepath)
                  (y-or-n-p
-                  (format "%s already exists. Do you want to overwite it ? "
+                  (format "%s already exists. Do you want to overwrite it ? "
                           dotspacemacs-filepath)) t)))
         (when install
           (write-file dotspacemacs-filepath)
