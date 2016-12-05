@@ -16,7 +16,6 @@
 (require 'core-debug)
 (require 'core-command-line)
 (require 'core-dotspacemacs)
-(require 'core-custom-settings)
 (require 'core-release-management)
 (require 'core-auto-completion)
 (require 'core-jump)
@@ -82,8 +81,7 @@ the final step of executing code in `emacs-startup-hook'.")
   (require 'core-configuration-layer)
   (dotspacemacs|call-func dotspacemacs/init "Calling dotfile init...")
   (when dotspacemacs-maximized-at-startup
-    (unless (frame-parameter nil 'fullscreen)
-      (toggle-frame-maximized))
+    (toggle-frame-maximized)
     (add-to-list 'default-frame-alist '(fullscreen . maximized)))
   (dotspacemacs|call-func dotspacemacs/user-init "Calling dotfile user init...")
   (setq dotspacemacs-editing-style (dotspacemacs//read-editing-style-config
@@ -138,9 +136,7 @@ the final step of executing code in `emacs-startup-hook'.")
                                       "with this build.")))
   ;; check for new version
   (if dotspacemacs-mode-line-unicode-symbols
-      (setq-default spacemacs-version-check-lighter "[⇪]"))
-  ;; install the dotfile if required
-  (spacemacs/maybe-install-dotfile))
+      (setq-default spacemacs-version-check-lighter "[⇪]")))
 
 (defun spacemacs//removes-gui-elements ()
   "Remove the menu bar, tool bar and scroll bars."
@@ -195,8 +191,6 @@ defer call using `spacemacs-post-user-config-hook'."
      ;; them in his/her ~/.spacemacs file
      (dotspacemacs|call-func dotspacemacs/user-config
                              "Calling dotfile user config...")
-     (dotspacemacs|call-func dotspacemacs/emacs-custom-settings
-                             "Calling dotfile Emacs custom settings...")
      (run-hooks 'spacemacs-post-user-config-hook)
      (setq spacemacs-post-user-config-hook-run t)
      (when (fboundp dotspacemacs-scratch-mode)

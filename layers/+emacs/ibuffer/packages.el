@@ -32,11 +32,7 @@
       (evil-ex-define-cmd "buffers" 'ibuffer))
     :config
     (evilified-state-evilify-map ibuffer-mode-map
-      :mode ibuffer-mode
-      :bindings
-      "gr" 'ibuffer-update
-      "gj" 'ibuffer-forward-filter-group
-      "gk" 'ibuffer-backward-filter-group)))
+      :mode ibuffer-mode)))
 
 (defun ibuffer/init-ibuffer-projectile()
     (use-package ibuffer-projectile

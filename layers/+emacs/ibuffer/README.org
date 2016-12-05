@@ -6,12 +6,10 @@
    - [[#layer][Layer]]
    - [[#grouping-buffers][Grouping buffers]]
  - [[#key-bindings][Key bindings]]
-   - [[#global][Global]]
-   - [[#ibuffer][IBuffer]]
 
 * Description
 
-This layer configures Emacs IBuffer for Spacemacs.
+This layer configures Emacs ibuffer for Spacemacs.
 
 * Install
 ** Layer
@@ -38,18 +36,9 @@ Example:
 #+END_SRC
 
 * Key bindings
-** Global
 
-| Key Binding | Description                   |
-|-------------+-------------------------------|
-| ~SPC b B~   | open IBuffer menu (global)    |
+| Key Binding | Description       |
+|-------------+-------------------|
+| ~SPC b B~   | open ibuffer menu |
 
-*Note:* The layer will also replace regular ~C-x C-b~ with =ibuffer=.
-
-** IBuffer
-
-| Key Binding | Description                   |
-|-------------+-------------------------------|
-| ~g r~       | update IBuffer ("refresh")    |
-| ~g j~       | move to next filter group     |
-| ~g k~       | move to previous filter group |
+*Note:* The layer will also replace regular ~C-x C-b~ by ibuffer.

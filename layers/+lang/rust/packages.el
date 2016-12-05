@@ -94,10 +94,4 @@
     (progn
       (spacemacs/add-to-hook 'rust-mode-hook '(racer-mode eldoc-mode))
       (spacemacs/declare-prefix-for-mode 'rust-mode "mg" "goto")
-      (add-to-list 'spacemacs-jump-handlers-rust-mode 'racer-find-definition)
-      (spacemacs/declare-prefix-for-mode 'rust-mode "mh" "help")
-      (spacemacs/set-leader-keys-for-major-mode 'rust-mode
-        "hh" 'spacemacs/racer-describe))
-    :config
-    (evilified-state-evilify-map racer-help-mode-map
-      :mode racer-help-mode)))
+      (add-to-list 'spacemacs-jump-handlers-rust-mode 'racer-find-definition))))

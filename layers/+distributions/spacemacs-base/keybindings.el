@@ -45,7 +45,6 @@
                                        ("sa"  "ag")
                                        ("sg"  "grep")
                                        ("sk"  "ack")
-                                       ("sr"  "ripgrep")
                                        ("st"  "pt")
                                        ("sw"  "web")
                                        ("t"   "toggles")
@@ -121,10 +120,9 @@
   "bd"    'spacemacs/kill-this-buffer
   "be"    'spacemacs/safe-erase-buffer
   "bh"    'spacemacs/home
-  "b C-d" 'spacemacs/kill-other-buffers
-  "b C-S-d" 'spacemacs/kill-matching-buffers-rudely
+  "b C-d" 'spacemacs/kill-matching-buffers-rudely
   "bn"    'next-buffer
-  "bm"    'view-echo-area-messages
+  "bm"    'spacemacs/kill-other-buffers
   "bN"    'spacemacs/new-empty-buffer
   "bP"    'spacemacs/copy-clipboard-to-whole-buffer
   "bp"    'previous-buffer
@@ -235,7 +233,6 @@
   "cr" 'recompile
   "cd" 'spacemacs/close-compilation-window)
 (with-eval-after-load 'compile
-  (evil-define-key 'motion compilation-mode-map (kbd "gf") 'find-file-at-point)
   (define-key compilation-mode-map "r" 'recompile)
   (define-key compilation-mode-map "g" nil))
 ;; narrow & widen -------------------------------------------------------------
@@ -407,7 +404,6 @@
   "ww"  'other-window
   "w/"  'split-window-right
   "w="  'balance-windows
-  "w+"  'spacemacs/window-layout-toggle
   "w_"  'spacemacs/maximize-horizontally)
 ;; text -----------------------------------------------------------------------
 (defalias 'count-region 'count-words-region)

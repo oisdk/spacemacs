@@ -38,7 +38,7 @@
       (add-to-list 'spacemacs-jump-handlers-scala-mode 'ensime-edit-definition))
     :config
     (progn
-      (setq ensime-startup-dirname (expand-file-name "ensime" spacemacs-cache-directory))
+      (setq user-emacs-ensime-directory ".cache/ensime")
 
       (evil-define-key 'insert ensime-mode-map
         (kbd ".") 'scala/completing-dot

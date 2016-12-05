@@ -85,5 +85,5 @@
     :mode (("\\.feature\\'" . feature-mode))))
 
 (defun ruby-on-rails/post-init-which-key ()
-  (push '((nil . "projectile-rails-\\(.+\\)") . (nil . "\\1"))
-        which-key-replacement-alist))
+  (push '("projectile-rails-\\(.+\\)" . "\\1")
+        which-key-description-replacement-alist))

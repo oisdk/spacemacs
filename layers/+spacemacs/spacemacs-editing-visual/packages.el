@@ -91,11 +91,10 @@
       (defun spacemacs/integrate-evil-search (forward)
         ;; isearch-string is last searched item.  Next time
         ;; "n" is hit we will use this.
-        (let* ((symbol (evil-find-thing forward 'symbol))
-               (regexp (concat "\\<" symbol "\\>")))
-          (setq isearch-string regexp
-                isearch-regexp regexp
-                evil-ex-search-pattern (evil-ex-make-search-pattern regexp)))
+        (setq isearch-string
+              (concat "\\<" (evil-find-thing forward 'symbol) "\\>")
+              isearch-regexp
+              (concat "\\<" (evil-find-thing forward 'symbol) "\\>"))
         ;; Next time "n" is hit, go the correct direction.
         (setq isearch-forward forward)
         ;; ahs does a case sensitive search.  We could set

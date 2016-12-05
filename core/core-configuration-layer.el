@@ -1666,10 +1666,8 @@ If called with a prefix argument ALWAYS-UPDATE, assume yes to update."
         (spacemacs-buffer/append
          (format "\n--> %s package(s) to be updated.\n" upgraded-count))
         (spacemacs-buffer/append
-         (format
-          (concat "\nEmacs has to be restarted to actually install the "
-                  "new version of the packages%s.\n")
-          (if (member "restart-emacs" update-packages) "" " (SPC q r)")))
+         (concat "\nEmacs has to be restarted to actually install the "
+                 "new version of the packages (SPC q r).\n"))
         (configuration-layer//cleanup-rollback-directory)
         (spacemacs//redisplay)))
     (when (eq upgrade-count 0)
