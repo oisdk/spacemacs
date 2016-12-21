@@ -16,17 +16,8 @@
 ;; lower value in your dotfile (function `dotspacemacs/user-config')
 (setq gc-cons-threshold 100000000)
 
-<<<<<<< HEAD
 (defconst spacemacs-version          "0.200.5" "Spacemacs version.")
-=======
-<<<<<<< HEAD
-(defconst spacemacs-version         "0.105.22" "Spacemacs version.")
-(defconst spacemacs-emacs-min-version   "24.3" "Minimal version of Emacs.")
-=======
-(defconst spacemacs-version          "0.200.3" "Spacemacs version.")
->>>>>>> master
 (defconst spacemacs-emacs-min-version   "24.4" "Minimal version of Emacs.")
->>>>>>> syl20bnr/master
 
 (if (not (version<= spacemacs-emacs-min-version emacs-version))
     (message (concat "Your version of Emacs (%s) is too old. "

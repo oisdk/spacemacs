@@ -9,14 +9,6 @@
 ;;
 ;;; License: GPLv3
 
-<<<<<<< HEAD
-(defvar java-packages
-  '(
-    eclim
-    company
-    ))
-
-=======
 (setq java-packages
       '(
         company
@@ -35,7 +27,6 @@
     :defer t
     :init (push 'company-emacs-eclim company-backends-java-mode)))
 
->>>>>>> syl20bnr/master
 (defun java/init-eclim ()
   (use-package eclim
     :defer t

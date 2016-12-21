@@ -74,21 +74,7 @@
             company-require-match nil
             company-dabbrev-ignore-case nil
             company-dabbrev-downcase nil)
-<<<<<<< HEAD:layers/auto-completion/packages.el
 
-      (defvar-local company-fci-mode-on-p nil)
-
-      (defun company-turn-off-fci (&rest ignore)
-        (when (boundp 'fci-mode)
-          (setq company-fci-mode-on-p fci-mode)
-          (when fci-mode (fci-mode -1))))
-
-      (defun company-maybe-turn-on-fci (&rest ignore)
-        (when company-fci-mode-on-p (fci-mode 1)))
-
-=======
-
->>>>>>> syl20bnr/master:layers/+completion/auto-completion/packages.el
       (add-hook 'company-completion-started-hook 'company-turn-off-fci)
       (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
       (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))
@@ -128,15 +114,6 @@
 
 (defun auto-completion/init-company-quickhelp ()
   (use-package company-quickhelp
-<<<<<<< HEAD:layers/auto-completion/packages.el
-    :if (and auto-completion-enable-help-tooltip (display-graphic-p))
-    :defer t
-    :init
-    (progn
-      (add-hook 'company-mode-hook 'company-quickhelp-mode)
-      (with-eval-after-load 'company
-        (setq company-frontends (delq 'company-echo-metadata-frontend company-frontends))))))
-=======
     :commands company-quickhelp-manual-begin
     :init
     (spacemacs|do-after-display-system-init
@@ -145,7 +122,6 @@
        (define-key company-active-map (kbd "M-h") #'company-quickhelp-manual-begin)
        (unless (eq auto-completion-enable-help-tooltip 'manual)
          (company-quickhelp-mode))))))
->>>>>>> syl20bnr/master:layers/+completion/auto-completion/packages.el
 
 (defun auto-completion/init-helm-c-yasnippet ()
   (use-package helm-c-yasnippet
@@ -214,11 +190,7 @@
       (define-key yas-minor-mode-map (kbd "M-s-/") 'yas-next-field)
       ;; configure snippet directories
       (let* ((spacemacs--auto-completion-dir
-<<<<<<< HEAD:layers/auto-completion/packages.el
-              (configuration-layer/get-layer-property 'auto-completion :dir))
-=======
               (configuration-layer/get-layer-local-dir 'auto-completion))
->>>>>>> syl20bnr/master:layers/+completion/auto-completion/packages.el
              (private-yas-dir (if auto-completion-private-snippets-directory
                                   auto-completion-private-snippets-directory
                                 (concat
@@ -267,14 +239,6 @@
       (setq aya-persist-snippets-dir
             (or auto-completion-private-snippets-directory
                 (concat configuration-layer-private-directory "snippets/")))
-<<<<<<< HEAD:layers/auto-completion/packages.el
-      (defun spacemacs/auto-yasnippet-expand ()
-        "Call `yas-expand' and switch to `insert state'"
-        (interactive)
-        (call-interactively 'aya-expand)
-        (unless holy-mode (evil-insert-state)))
-=======
->>>>>>> syl20bnr/master:layers/+completion/auto-completion/packages.el
       (spacemacs/declare-prefix "iS" "auto-yasnippet")
       (spacemacs/set-leader-keys
         "iSc" 'aya-create

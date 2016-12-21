@@ -130,11 +130,6 @@
 
       ;; hooks
       (add-hook 'haskell-mode-hook 'spacemacs/init-haskell-mode)
-<<<<<<< HEAD
-      (unless haskell-enable-ghc-mod-support
-        (add-hook 'haskell-mode-hook 'interactive-haskell-mode))
-=======
->>>>>>> syl20bnr/master
 
       ;; prefixes
       (dolist (mode haskell-modes)
@@ -150,43 +145,6 @@
       ;; key bindings
       (defun spacemacs/haskell-process-do-type-on-prev-line ()
         (interactive)
-<<<<<<< HEAD
-        (if haskell-enable-ghci-ng-support
-            (haskell-mode-show-type-at 1)
-          (haskell-process-do-type 1)))
-
-      (spacemacs/set-leader-keys-for-major-mode 'haskell-mode
-        "gg"  'haskell-mode-jump-to-def-or-tag
-        "gi"  'haskell-navigate-imports
-        "f"   'haskell-mode-stylish-buffer
-
-        "sb"  'haskell-process-load-file
-        "sc"  'haskell-interactive-mode-clear
-        "ss"  'spacemacs/haskell-interactive-bring
-        "sS"  'haskell-interactive-switch
-
-        "ca"  'haskell-process-cabal
-        "cb"  'haskell-process-cabal-build
-        "cc"  'haskell-compile
-        "cv"  'haskell-cabal-visit-file
-
-        "hd"  'inferior-haskell-find-haddock
-        "hh"  'hoogle
-        "hH"  'haskell-hoogle-lookup-from-local
-        "hi"  (lookup-key haskell-mode-map (kbd "C-c TAB"))
-        "ht"  (lookup-key haskell-mode-map (kbd "C-c C-t"))
-        "hT"  'spacemacs/haskell-process-do-type-on-prev-line
-        "hy"  'hayoo
-
-        "dd"  'haskell-debug
-        "db"  'haskell-debug/break-on-function
-        "dn"  'haskell-debug/next
-        "dN"  'haskell-debug/previous
-        "dB"  'haskell-debug/delete
-        "dc"  'haskell-debug/continue
-        "da"  'haskell-debug/abandon
-        "dr"  'haskell-debug/refresh)
-=======
         (haskell-process-do-type 1))
 
       (dolist (mode haskell-modes)
@@ -236,7 +194,6 @@
         "r" 'haskell-debug/refresh
         "s" 'haskell-debug/step
         "t" 'haskell-debug/trace)
->>>>>>> syl20bnr/master
 
       ;; configure C-c C-l so it doesn't throw any errors
       (bind-key "C-c C-l" 'haskell-process-load-file haskell-mode-map)

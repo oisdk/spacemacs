@@ -1,45 +1,4 @@
 #+TITLE: Spacemacs Conventions
-<<<<<<< HEAD
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
-
-* Spacemacs conventions                                     :TOC_4_org:noexport:
- - [[Code guidelines][Code guidelines]]
-   - [[Spacemacs core and layer][Spacemacs core and layer]]
-   - [[All layers][All layers]]
-   - [[Use-package][Use-package]]
- - [[Key bindings conventions][Key bindings conventions]]
-   - [[Reserved prefix][Reserved prefix]]
-     - [[User prefix][User prefix]]
-     - [[Major mode prefix][Major mode prefix]]
-     - [[Micro-state][Micro-state]]
-   - [[Evilified buffers][Evilified buffers]]
-   - [[Navigation][Navigation]]
-     - [[n and N][n and N]]
-     - [[Code Navigation][Code Navigation]]
-     - [[=insert state= buffers][=insert state= buffers]]
-   - [[Confirm and Abort][Confirm and Abort]]
-   - [[Evaluation][Evaluation]]
-   - [[REPLs][REPLs]]
-     - [[Send code][Send code]]
-     - [[In terminal][In terminal]]
-   - [[Building and Compilation][Building and Compilation]]
-   - [[Debugging][Debugging]]
-   - [[Plain Text Markup Languages][Plain Text Markup Languages]]
-     - [[Headers][Headers]]
-     - [[Insertion of common elements][Insertion of common elements]]
-     - [[Text manipulation][Text manipulation]]
-     - [[Movement in normal mode][Movement in normal mode]]
-     - [[Promotion, Demotion and element movement][Promotion, Demotion and element movement]]
-     - [[Table editing][Table editing]]
-   - [[Tests][Tests]]
-     - [[All languages][All languages]]
-     - [[Language specific][Language specific]]
-   - [[Toggles][Toggles]]
-   - [[Refactoring][Refactoring]]
-   - [[Help or Documentation][Help or Documentation]]
- - [[Writing documentation][Writing documentation]]
-   - [[Spacing in documentation][Spacing in documentation]]
-=======
 
 * Spacemacs conventions                                     :TOC_4_gh:noexport:
  - [[#code-guidelines][Code guidelines]]
@@ -79,7 +38,6 @@
    - [[#help-or-documentation][Help or Documentation]]
  - [[#writing-documentation][Writing documentation]]
    - [[#spacing-in-documentation][Spacing in documentation]]
->>>>>>> syl20bnr/master
 
 * Code guidelines
 ** Spacemacs core and layer
@@ -96,14 +54,6 @@ Variables follow these conventions:
 A package is initialized in a function with name =<layer>/init-xxx= where:
   - =<layer>= is the layer name
   - =xxx= is the package name
-  
-** Use-package
-- Always use =progn= when a code block requires multiple lines for =:init= or
-  =:config= keywords.
-- If there is only one line of code then try to keep =:init= or =:config=
-  keywords on the same line.
-- Don't nest multiple =use-package= calls unless you have a very good reason
-  to do it.
 
 ** Use-package
 - Always use =progn= when a code block requires multiple lines for =:init= or
@@ -421,12 +371,6 @@ Spacemacs provides an example layer =README.org= file in
   - At the end of each header node, there should be an empty line
   - Note: Many layer =READMEs= do not follow this convention yet. Please fix
     them if you can.
-<<<<<<< HEAD
-  
-- To keep things readable only mention the prefix ~SPC~ when documenting
-  key bindings, you don't need to mention ~M-m~. 
-=======
 
 - To keep things readable only mention the prefix ~SPC~ when documenting
   key bindings, you don't need to mention ~M-m~.
->>>>>>> syl20bnr/master

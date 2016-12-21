@@ -200,26 +200,13 @@
 (defun javascript/init-tern ()
   (use-package tern
     :defer t
-<<<<<<< HEAD
-    :if (javascript//tern-detect)
-=======
     :diminish tern-mode
->>>>>>> syl20bnr/master
     :init (add-hook 'js2-mode-hook 'tern-mode)
     :config
     (progn
       (when javascript-disable-tern-port-files
         (add-to-list 'tern-command "--no-port-file" 'append))
-<<<<<<< HEAD
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "rrV" 'tern-rename-variable)
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "hd" 'tern-get-docs)
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "gg" 'tern-find-definition)
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "gG" 'tern-find-definition-by-name)
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode (kbd " C-g") 'tern-pop-find-definition)
-      (spacemacs/set-leader-keys-for-major-mode 'js2-mode "ht" 'tern-get-type))))
-=======
       (spacemacs//set-tern-key-bindings 'js2-mode))))
->>>>>>> syl20bnr/master
 
 (defun javascript/init-web-beautify ()
   (use-package web-beautify

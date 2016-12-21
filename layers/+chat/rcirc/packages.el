@@ -32,16 +32,6 @@
     (spacemacs/set-leader-keys "irc" 'helm-rcirc-auto-join-channels)))
 
 (defun rcirc/post-init-persp-mode ()
-<<<<<<< HEAD:layers/+irc/rcirc/packages.el
-  (spacemacs|define-custom-layout "@RCIRC"
-    :binding "i"
-    :body
-    (progn
-      (add-hook 'rcirc-mode-hook #'(lambda ()
-                                     (persp-add-buffer (current-buffer))))
-      (call-interactively 'spacemacs/rcirc)))
-=======
->>>>>>> syl20bnr/master:layers/+chat/rcirc/packages.el
   ;; do not save rcirc buffers
   (with-eval-after-load 'persp-mode
     (push (lambda (b) (with-current-buffer b (eq major-mode 'rcirc-mode)))

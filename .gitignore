@@ -35,10 +35,6 @@ tmp/
 .python-environments/
 server/
 /network-security.data
-<<<<<<< HEAD
-*~
-=======
->>>>>>> syl20bnr/master
 *.elc
 *.pyc
 /*.zip

@@ -33,7 +33,6 @@
     pytest
     (python :location built-in)
     pyvenv
-    py-yapf
     semantic
     smartparens
     stickyfunc-enhance
@@ -64,8 +63,6 @@
 
       (defadvice anaconda-mode-goto (before python/anaconda-mode-goto activate)
         (evil--jumps-push)))))
-<<<<<<< HEAD
-=======
 
 (defun python/post-init-company ()
   (spacemacs|add-company-hook python-mode)
@@ -80,7 +77,6 @@
     :defer t
     :init
     (push 'company-anaconda company-backends-python-mode)))
->>>>>>> syl20bnr/master
 
 (defun python/init-cython-mode ()
   (use-package cython-mode
@@ -98,8 +94,6 @@
       (anaconda-eldoc-mode)))
   (add-hook 'python-mode-hook 'spacemacs//init-eldoc-python-mode))
 
-<<<<<<< HEAD
-=======
 (defun python/post-init-evil-matchit ()
   (add-hook `python-mode-hook `turn-on-evil-matchit-mode))
 
@@ -141,7 +135,6 @@
             "sr" 'lisp-eval-region
             "sR" 'lisp-eval-region-and-go))))))
 
->>>>>>> syl20bnr/master
 (defun python/init-live-py-mode ()
   (use-package live-py-mode
     :defer t
@@ -152,15 +145,6 @@
 
 (defun python/init-nose ()
   (use-package nose
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    :if (eq 'nose python-test-runner)
-=======
-    :if (or (eq 'nose python-test-runner)
-            (if (listp python-test-runner) (member 'nose python-test-runner)))
->>>>>>> syl20bnr/master
->>>>>>> master
     :commands (nosetests-one
                nosetests-pdb-one
                nosetests-all
@@ -169,41 +153,15 @@
                nosetests-pdb-module
                nosetests-suite
                nosetests-pdb-suite)
-<<<<<<< HEAD
     :init (spacemacs//bind-python-testing-keys)
-=======
-    :init
-<<<<<<< HEAD
-    (spacemacs/set-leader-keys-for-major-mode 'python-mode
-      "tA" 'nosetests-pdb-all
-      "ta" 'nosetests-all
-      "tB" 'nosetests-pdb-module
-      "tb" 'nosetests-module
-      "tT" 'nosetests-pdb-one
-      "tt" 'nosetests-one
-      "tM" 'nosetests-pdb-module
-      "tm" 'nosetests-module
-      "tS" 'nosetests-pdb-suite
-      "ts" 'nosetests-suite)
-=======
-    (progn
-      (spacemacs//bind-python-testing-keys)
-      (spacemacs/set-leader-keys-for-major-mode 'python-mode
-        "tS" 'nosetests-pdb-suite
-        "ts" 'nosetests-suite))
->>>>>>> syl20bnr/master
->>>>>>> master
     :config
     (progn
       (add-to-list 'nose-project-root-files "setup.cfg")
       (setq nose-use-verbose nil))))
-<<<<<<< HEAD
-=======
 
 (defun python/pre-init-org ()
   (spacemacs|use-package-add-hook org
     :post-config (add-to-list 'org-babel-load-languages '(python . t))))
->>>>>>> syl20bnr/master
 
 (defun python/init-pip-requirements ()
   (use-package pip-requirements
@@ -434,23 +392,6 @@
       (define-key inferior-python-mode-map
         (kbd "C-c M-l") 'spacemacs/comint-clear-buffer))))
 
-<<<<<<< HEAD
-(defun python/post-init-evil-matchit ()
-    (add-hook `python-mode-hook `turn-on-evil-matchit-mode))
-
-(defun python/post-init-flycheck ()
-  (spacemacs/add-flycheck-hook 'python-mode-hook))
-
-(defun python/init-hy-mode ()
-  (use-package hy-mode
-    :defer t))
-
-(defun python/init-helm-pydoc ()
-  (use-package helm-pydoc
-    :defer t
-    :init
-    (spacemacs/set-leader-keys-for-major-mode 'python-mode "hd" 'helm-pydoc)))
-=======
 (defun python/post-init-semantic ()
   (when (configuration-layer/package-usedp 'anaconda-mode)
       (add-hook 'python-mode-hook
@@ -467,7 +408,6 @@ fix this issue."
     (condition-case-unless-debug nil
         ad-do-it
       (error nil))))
->>>>>>> syl20bnr/master
 
 (defun python/post-init-smartparens ()
   (spacemacs/add-to-hooks 'smartparens-mode '(inferior-python-mode-hook
@@ -480,50 +420,6 @@ fix this issue."
           ad-do-it
         (call-interactively 'sp-backward-delete-char)))))
 
-<<<<<<< HEAD
-(when (configuration-layer/layer-usedp 'auto-completion)
-  (defun python/post-init-company ()
-    (spacemacs|add-company-hook python-mode)
-    (spacemacs|add-company-hook inferior-python-mode)
-    (push '(company-files company-capf) company-backends-inferior-python-mode)
-    (add-hook 'inferior-python-mode-hook (lambda ()
-                                           (setq-local company-minimum-prefix-length 0)
-                                           (setq-local company-idle-delay 0.5))))
-
-  (defun python/init-company-anaconda ()
-    (use-package company-anaconda
-      :if (configuration-layer/package-usedp 'company)
-      :defer t
-      :init
-      (push 'company-anaconda company-backends-python-mode))))
-
-(defun python/init-py-yapf ()
-  (use-package py-yapf
-    :init
-    (spacemacs/set-leader-keys-for-major-mode 'python-mode "=" 'py-yapf-buffer)
-    :config
-    (when python-enable-yapf-format-on-save
-      (add-hook 'python-mode-hook 'py-yapf-enable-on-save))))
-
-(defun python/post-init-semantic ()
-  (when (configuration-layer/package-usedp 'anaconda-mode)
-      (add-hook 'python-mode-hook
-                'spacemacs//disable-semantic-idle-summary-mode t))
-  (add-hook 'python-mode-hook 'semantic-mode)
-  (add-hook 'python-mode-hook 'spacemacs//python-imenu-create-index-use-semantic)
-
-  (defadvice semantic-python-get-system-include-path
-      (around semantic-python-skip-error-advice activate)
-    "Don't cause error when Semantic cannot retrieve include
-paths for Python then prevent the buffer to be switched. This
-issue might be fixed in Emacs 25. Until then, we need it here to
-fix this issue."
-    (condition-case-unless-debug nil
-        ad-do-it
-      (error nil))))
-
-=======
->>>>>>> syl20bnr/master
 (defun python/post-init-stickyfunc-enhance ()
   (add-hook 'python-mode-hook 'spacemacs/lazy-load-stickyfunc-enhance))
 

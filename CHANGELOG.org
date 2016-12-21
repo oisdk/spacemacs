@@ -1266,11 +1266,7 @@
 ** 0.105.18 (2016/04/10)
 - Revert hotfix for =Yasnippet=, the bug has been fixed upstream and is now
   available in MELPA (thanks to TheBB)
-<<<<<<< HEAD
-- Remove oboslete package =evil-jumper= which is now part of =evil=
-=======
 - Remove obsolete package =evil-jumper= which is now part of =evil=
->>>>>>> syl20bnr/master
   (thanks to justbur)
 ** 0.105.17 (2016/04/09)
 - Hotfix for Yasnippet, using stable version until resolution of
@@ -1372,11 +1368,7 @@ Improve loading robustness:
 - Remove files from rollback slot list (thanks to microamp)
 - Don't catch errors while loading if =--debug-init= is provided.
 - Don't change scratch major mode if buffer exists (thanks to TheBB)
-<<<<<<< HEAD
-- Restore windows layout when qitting =ediff= (thanks to fbergroth)
-=======
 - Restore windows layout when quitting =ediff= (thanks to fbergroth)
->>>>>>> syl20bnr/master
 - Ensure that =pcache-directory= ends in a slash (thanks to rpglover64)
 - Ensure new Spacemacs layouts only shows home buffer (thanks to bmag)
 *** Improvements

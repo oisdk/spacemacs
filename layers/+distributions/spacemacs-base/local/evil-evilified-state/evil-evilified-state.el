@@ -44,12 +44,6 @@
 
 (require 'evil)
 (require 'bind-map)
-<<<<<<< HEAD:layers/+distribution/spacemacs-base/local/evil-evilified-state/evil-evilified-state.el
-
-(defvar evilified-state--modes nil
-  "List of all evilified modes.")
-=======
->>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/local/evil-evilified-state/evil-evilified-state.el
 
 (defvar evilified-state--evil-surround nil
   "Evil surround mode variable backup.")

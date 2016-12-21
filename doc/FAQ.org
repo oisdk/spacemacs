@@ -1,53 +1,4 @@
 #+TITLE: Frequently Asked Questions
-<<<<<<< HEAD
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
-
-* FAQ                                                       :TOC_4_org:noexport:
- - [[Common][Common]]
-   - [[Which version of Spacemacs am I running?][Which version of Spacemacs am I running?]]
-   - [[What is the official pronunciation of Spacemacs?][What is the official pronunciation of Spacemacs?]]
-   - [[Why are packages installed with =package-install= automatically deleted by Spacemacs when it boots?][Why are packages installed with =package-install= automatically deleted by Spacemacs when it boots?]]
-   - [[How to fix package download errors when installing Spacemacs ?][How to fix package download errors when installing Spacemacs ?]]
-   - [[How to fix =Symbol's value as variable is void= errors on startup?][How to fix =Symbol's value as variable is void= errors on startup?]]
-   - [[How to fix =(wrong-type-argument arrayp nil)= errors on startup?][How to fix =(wrong-type-argument arrayp nil)= errors on startup?]]
-   - [[The Spacemacs banner is ugly, what should I do?][The Spacemacs banner is ugly, what should I do?]]
-   - [[The powerline separators are ugly, how can I fix them?][The powerline separators are ugly, how can I fix them?]]
-   - [[The powerline separators have no anti-aliasing, what can I do?][The powerline separators have no anti-aliasing, what can I do?]]
-   - [[Why is after-init-hook not executed?][Why is after-init-hook not executed?]]
-   - [[What is the difference between =spacemacs-base= and =spacemacs= distributions?][What is the difference between =spacemacs-base= and =spacemacs= distributions?]]
-   - [[Should I place my settings in =user-init= or =user-config=?][Should I place my settings in =user-init= or =user-config=?]]
-   - [[Why do some of my =org=-related settings cause problems?][Why do some of my =org=-related settings cause problems?]]
-   - [[Why is Spacemacs hanging on startup?][Why is Spacemacs hanging on startup?]]
-   - [[Why does =helm-M-x= (~SPC SPC~) not accept the prefix argument?][Why does =helm-M-x= (~SPC SPC~) not accept the prefix argument?]]
-   - [[Why does my color theme not render correctly in terminal mode?][Why does my color theme not render correctly in terminal mode?]]
-   - [[Typing quickly =fd= takes me out of =insert state=. What is going on?][Typing quickly =fd= takes me out of =insert state=. What is going on?]]
-   - [[Why do I get files starting with .#?][Why do I get files starting with .#?]]
- - [[How do I...][How do I...]]
-   - [[Install a package not provided by a layer?][Install a package not provided by a layer?]]
-   - [[Disable a package completely?][Disable a package completely?]]
-   - [[Disable a package only for a specific major-mode?][Disable a package only for a specific major-mode?]]
-   - [[Disable company for a specific major-mode?][Disable company for a specific major-mode?]]
-   - [[Change special buffer rules?][Change special buffer rules?]]
-   - [[Enable navigation by visual lines?][Enable navigation by visual lines?]]
-   - [[Disable evilification of a mode?][Disable evilification of a mode?]]
-   - [[Include underscores in word motions?][Include underscores in word motions?]]
-   - [[Setup =$PATH=?][Setup =$PATH=?]]
-   - [[Change or define an alias for a leader key?][Change or define an alias for a leader key?]]
-   - [[Restore the sentence delimiter to two spaces?][Restore the sentence delimiter to two spaces?]]
-   - [[Prevent the visual selection overriding my system clipboard?][Prevent the visual selection overriding my system clipboard?]]
-   - [[Make spell-checking support curly quotes (or any other character)?][Make spell-checking support curly quotes (or any other character)?]]
-   - [[Use Spacemacs as the =$EDITOR= for git commits?][Use Spacemacs as the =$EDITOR= for git commits?]]
-   - [[Try Spacemacs without modifying my existing Emacs configuration?][Try Spacemacs without modifying my existing Emacs configuration?]]
-   - [[Make copy/paste working with the mouse in X11 terminals?][Make copy/paste working with the mouse in X11 terminals?]]
-   - [[Use =helm-ag= to search only in files of a certain type?][Use =helm-ag= to search only in files of a certain type?]]
- - [[Windows][Windows]]
-   - [[Why do the fonts look crappy on Windows?][Why do the fonts look crappy on Windows?]]
-   - [[Why is there no Spacemacs logo in the startup buffer?][Why is there no Spacemacs logo in the startup buffer?]]
-   - [[Why are all packages unavailable?][Why are all packages unavailable?]]
-   - [[The powerline isn't shown correctly when Spacemacs is used within =PuTTY=.][The powerline isn't shown correctly when Spacemacs is used within =PuTTY=.]]
- - [[OS X][OS X]]
-   - [[Why are the powerline colors not correct on OS X?][Why are the powerline colors not correct on OS X?]]
-=======
 
 * FAQ                                                       :TOC_4_gh:noexport:
  - [[#common][Common]]
@@ -98,7 +49,6 @@
    - [[#why-is-there-no-spacemacs-logo-in-the-startup-buffer][Why is there no Spacemacs logo in the startup buffer?]]
    - [[#why-are-all-packages-unavailable][Why are all packages unavailable?]]
    - [[#the-powerline-isnt-shown-correctly-when-spacemacs-is-used-within-putty][The powerline isn't shown correctly when Spacemacs is used within =PuTTY=]]
->>>>>>> syl20bnr/master
 
 * Common
 ** Which version of Spacemacs am I running?
@@ -119,11 +69,6 @@ Note that some Linux distributions may start to create packages for Spacemacs,
 they are unofficial packages, we will never package Emacs with Spacemacs.
 
 ** Why are packages installed with =package-install= automatically deleted by Spacemacs when it boots?
-<<<<<<< HEAD
-To declare new packages you have to create a new configuration layer or add the
-package name to the variable =dotspacemacs-additonal-packages= of your dotfile,
-see the [[file:QUICK_START.org][quick start guide]] for more info.
-=======
 By default Spacemacs will keep only the packages that you use (i.e. the packages
 belonging to a layer explicitly listed in the variable
 =dotspacemacs-configuration-layers=).
@@ -138,34 +83,13 @@ To install packages that does not belong to any Spacemacs layers, you can:
   manually.
 
 To create a new configuration layer see the [[file:QUICK_START.org][quick start guide]] for more info.
->>>>>>> syl20bnr/master
 
 ** How to fix package download errors when installing Spacemacs ?
 Since 0.105.0 HTTPS protocol is used by default to download packages. If your
 environment does not allow HTTPS to reach ELPA repositories then you can start
 Emacs with the =--insecure= argument for force the usage of HTTP non secured
 protocol. You can set the variable =dotspacemacs-elpa-https= to =nil= in your
-<<<<<<< HEAD
-dotfile to remove the need to start Emacs with =--insecure== argument.
-=======
 dotfile to remove the need to start Emacs with =--insecure= argument.
-
-** How to fix =Symbol's value as variable is void= errors on startup?
-If Emacs reports an error that the symbol =closed= or =-= is unbound as a
-variable, it is probably because you are using HTTPS to download packages, but
-you shouldn't be. Try deleting your packages (the =.emacs.d/elpa= folder), and
-restart Emacs without HTTPS to download the packages again. There are two ways
-to do this:
-
-- Run Emacs with the =--insecure= command line argument: =emacs --insecure=. You
-  will have to do this again the next time you update your packages.
-- Set the variable =dotspacemacs-elpa-https= to =nil= in your dotfile. This has
-  the same effect as =--insecure=, but is persistent.
-
-** How to fix =(wrong-type-argument arrayp nil)= errors on startup?
-This is most likely caused by a corrupted package archive. Try deleting your
-=~/.emacs.d/elpa/archives/= folder and restart Emacs.
->>>>>>> syl20bnr/master
 
 ** How to fix =Symbol's value as variable is void= errors on startup?
 If Emacs reports an error that the symbol =closed= or =-= is unbound as a
@@ -210,11 +134,7 @@ experience.
 
 Set the distribution with =dotspacemacs-distribution= variable. The default is
 =spacemacs=. For more information as to what is included, check out the
-<<<<<<< HEAD
-=packages.el= file in the respective folders in the =+distribution= folder of
-=======
 =packages.el= file in the respective folders in the =+distributions= folder of
->>>>>>> syl20bnr/master
 the =layers/= directory.
 
 ** Should I place my settings in =user-init= or =user-config=?
@@ -300,8 +220,6 @@ disable this behaviour:
 #+BEGIN_SRC emacs-lisp
 (setq create-lockfiles nil)
 #+END_SRC
-<<<<<<< HEAD
-=======
 
 ** Why do I get '4m' characters inside ansi-term?
 Ansi-term only has a subset of capabilities supported by xterm256. Your shell
@@ -339,7 +257,6 @@ warning, e.g. from =dotspacemacs/user-init=:
 #+BEGIN_SRC emacs-lisp
   (setq exec-path-from-shell-check-startup-files nil)
 #+END_SRC
->>>>>>> syl20bnr/master
 
 You can also disable this feature entirely by adding =exec-path-from-shell= to
 the list =dotspacemacs-excluded-packages= if you prefer setting =exec-path=
@@ -591,11 +508,7 @@ enable copying/pasting with the mouse. You need to add this line to your
 
 ** Use =helm-ag= to search only in files of a certain type?
 It is possible to restrict the scope of =helm-ag= to search only expressions in
-<<<<<<< HEAD
-some specified file types. There is two way of doing this, both by appending
-=======
 some specified file types. There are two ways of doing this, both by appending
->>>>>>> syl20bnr/master
 some expressions to the search input:
 
 - By using a regexp with =-G=, for instance =-G\.el$= will look for all files
@@ -611,12 +524,6 @@ some expressions to the search input:
 This is possible because =helm-ag= is treating the search input as command-line
 arguments of the =ag= program.
 
-<<<<<<< HEAD
-* Windows
-** Why do the fonts look crappy on Windows?
-You can install [[https://code.google.com/p/mactype/][MacType]] on Windows to get very nice looking fonts. It is also
-recommended to disable smooth scrolling on Windows.
-=======
 ** Modify spacemacs documentation look (space-doc-mode)
 You can modify the list of visual enhancements applied by the =space-doc-mode=:
 #+BEGIN_SRC emacs-lisp
@@ -655,7 +562,6 @@ To fix this, add the following snippet to your ~user-config~:
 You can install [[https://code.google.com/archive/p/gdipp/][GDIPP]] (simplest) or [[https://code.google.com/p/mactype/][MacType]] (more complete) on Windows to get
 very nice looking fonts. It is also recommended to disable smooth scrolling on
 Windows.
->>>>>>> syl20bnr/master
 
 ** Why is there no Spacemacs logo in the startup buffer?
 A GUI build of emacs supporting image display is required. You can follow the

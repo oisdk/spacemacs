@@ -70,17 +70,6 @@ configuration layer, as detailed in [[file:../../../doc/DOCUMENTATION.org::Setti
   (javascript :variables javascript-disable-tern-port-files nil)
 #+END_SRC
 
-<<<<<<< HEAD
-To make tern re-use the server across multiple different editing sessions (thus
-creating multiple `.tern-port` files for each document you have open [[http://ternjs.net/doc/manual.html][see here
-for more details]]):
-
-#+BEGIN_SRC emacs-lisp
-  (javascript :variables javascript-disable-tern-port-files nil)
-#+END_SRC
-
-To change how js2-mode indents code, set the variable =js2-basic-offset=, as such:
-=======
 Windows users may need to set the variable =tern-command= in order for emacs to
 locate and launch tern server successfully. See [[https://github.com/syl20bnr/spacemacs/issues/5733][this open issue for more
 details]]. The variable can be set when adding the =javascript= configuration
@@ -93,7 +82,6 @@ layer:
 ** Indentation
 To change how js2-mode indents code, set the variable =js2-basic-offset=, as
 such:
->>>>>>> syl20bnr/master
 
 #+BEGIN_SRC emacs-lisp
   (setq-default js2-basic-offset 2)

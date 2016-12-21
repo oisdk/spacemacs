@@ -46,6 +46,7 @@
         "Disable electric-indent-mode and let indentation cycling feature work"
         (if (fboundp 'electric-indent-local-mode)
             (electric-indent-local-mode -1)))
+
       (add-hook 'elm-mode-hook 'spacemacs/init-elm-mode))
     :config
     (progn

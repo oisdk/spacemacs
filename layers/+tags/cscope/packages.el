@@ -9,16 +9,11 @@
 ;;
 ;;; License: GPLv3
 
-<<<<<<< HEAD:layers/cscope/packages.el
-(setq cscope-packages '(helm-cscope
-                        xcscope))
-=======
 (setq cscope-packages
       '(
         (helm-cscope :toggle (configuration-layer/package-usedp 'helm))
         xcscope
         ))
->>>>>>> syl20bnr/master:layers/+tags/cscope/packages.el
 
 (defun cscope/init-xcscope ()
   (use-package xcscope

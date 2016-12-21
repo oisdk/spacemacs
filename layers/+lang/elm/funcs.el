@@ -10,19 +10,11 @@
 ;;; License: GPLv3
 
 
-<<<<<<< HEAD
-=======
 ;; elm-mode
->>>>>>> syl20bnr/master
 
 (defun spacemacs//elm-find-root ()
   (setq default-directory (elm--find-dependency-file-path)))
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> syl20bnr/master
 (defun spacemacs/elm-compile-buffer-output ()
   (interactive)
   (let* ((fname (format "%s.js" (downcase (file-name-base (buffer-file-name))))))

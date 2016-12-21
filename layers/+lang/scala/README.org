@@ -57,14 +57,8 @@ project's =project/build.properties=. For example,
 #+END_SRC
 
 ** Usage
-<<<<<<< HEAD
-
-1. Create a =.ensime= file at the root of your Scala project using
-   =sbt ensimeConfig= and =sbt ensimeConfigProject= at the shell.
-=======
 1. Create a =.ensime= file at the root of your Scala project using =sbt
    ensimeConfig= and =sbt ensimeConfigProject= at the shell.
->>>>>>> syl20bnr/master
 2. Run =M-x ensime= within Emacs to start an ENSIME session.
 
 Each Scala project uses a dedicated ENSIME session, so you only need to run =M-x
@@ -95,14 +89,6 @@ variable to a valid location.
   (setq-default flycheck-scalastylerc "/usr/local/etc/scalastyle_config.xml")
 #+END_SRC
 
-<<<<<<< HEAD
-To enable the feature =ensime-print-type-at-point= when cursor moves, set the
-variable =scala-enable-eldoc= to =t=.
-
-#+BEGIN_SRC emacs-lisp
-  (setq-default dotspacemacs-configuration-layers '(
-    (scala :variables scala-enable-eldoc t)))
-=======
 See the [[http://www.flycheck.org/en/latest/languages.html?highlight=scala#syntax-checker-scala-scalastyle][flycheck documentation]] and [[http://www.scalastyle.org/configuration.html][scalastyle configuration]] for up-to-date
 configuration instructions.
 
@@ -121,12 +107,7 @@ variable =scala-enable-eldoc= to =t=.
 
 #+BEGIN_SRC emacs-lisp
   (setq-default dotspacemacs-configuration-layers '(
-<<<<<<< HEAD
     (scala :variables scala-enable-eldoc t)))
-=======
-    (scala :variables scala-use-java-doc-style t)))
->>>>>>> syl20bnr/master
->>>>>>> master
 #+END_SRC
 
 Enabling this option can cause slow editor performance.

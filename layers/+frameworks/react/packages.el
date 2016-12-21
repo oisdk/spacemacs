@@ -13,10 +13,7 @@
       '(
         company
         company-tern
-<<<<<<< HEAD
-=======
         emmet-mode
->>>>>>> syl20bnr/master
         evil-matchit
         flycheck
         js-doc
@@ -32,22 +29,8 @@
 (defun react/post-init-company-tern ()
   (push 'company-tern company-backends-react-mode))
 
-<<<<<<< HEAD
-(defun react/post-init-evil-matchit ()
-  (with-eval-after-load 'evil-matchit
-    (plist-put evilmi-plugins 'react-mode '((evilmi-simple-get-tag evilmi-simple-jump)
-                                            (evilmi-javascript-get-tag evilmi-javascript-jump)
-                                            (evilmi-html-get-tag evilmi-html-jump)))))
-
-(defun react/pre-init-flycheck ()
-  (spacemacs|use-package-add-hook flycheck
-    :post-config
-    (progn
-      (flycheck-add-mode 'javascript-eslint 'react-mode)
-=======
 (defun react/post-init-emmet-mode ()
   (add-hook 'react-mode-hook 'emmet-mode))
->>>>>>> syl20bnr/master
 
 (defun react/post-init-evil-matchit ()
   (with-eval-after-load 'evil-matchit
@@ -79,24 +62,10 @@
   (add-hook 'react-mode-hook 'spacemacs/js-doc-require)
   (spacemacs/js-doc-set-key-bindings 'react-mode))
 
-<<<<<<< HEAD
-(defun react//setup-imenu ()
-  (setq imenu-create-index-function #'js2-mode-create-imenu-index))
-
-(defun react/post-init-js2-mode ()
-  (add-hook 'react-mode-hook 'react//setup-imenu)
-  (add-hook 'react-mode-hook 'js2-imenu-extras-mode)
-  (add-hook 'react-mode-hook 'js2-minor-mode))
-
-(defun react/post-init-js2-refactor ()
-  (add-hook 'react-mode-hook 'spacemacs/js2-refactor-require)
-  (spacemacs/js2-refactor-set-key-bindings 'react-mode))
-=======
 (defun react/post-init-smartparens ()
   (if dotspacemacs-smartparens-strict-mode
       (add-hook 'react-mode-hook #'smartparens-strict-mode)
     (add-hook 'react-mode-hook #'smartparens-mode)))
->>>>>>> syl20bnr/master
 
 (defun react/post-init-tern ()
   (add-hook 'react-mode-hook 'tern-mode)
@@ -112,10 +81,7 @@
   (add-to-list 'auto-mode-alist '("\\index.android.js\\'" . react-mode))
   (add-to-list 'auto-mode-alist '("\\index.ios.js\\'" . react-mode))
   (add-to-list 'magic-mode-alist '("/\\*\\* @jsx React\\.DOM \\*/" . react-mode))
-<<<<<<< HEAD
-=======
   (add-to-list 'magic-mode-alist '("^import React" . react-mode))
->>>>>>> syl20bnr/master
   (defun spacemacs//setup-react-mode ()
     "Adjust web-mode to accommodate react-mode"
     (emmet-mode 0)
@@ -126,13 +92,5 @@
     ;; Force jsx content type
     (web-mode-set-content-type "jsx")
     ;; Don't auto-quote attribute values
-<<<<<<< HEAD
-    (setq-local web-mode-enable-auto-quoting nil)
-    ;; Why do we do this ?
-    (defadvice web-mode-highlight-part (around tweak-jsx activate)
-      (let ((web-mode-enable-part-face nil))
-        ad-do-it)))
-=======
     (setq-local web-mode-enable-auto-quoting nil))
->>>>>>> syl20bnr/master
   (add-hook 'react-mode-hook 'spacemacs//setup-react-mode))

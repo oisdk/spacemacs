@@ -100,13 +100,8 @@
   (interactive)
   (cl-case version-control-diff-tool
     (diff-hl     diff-hl-mode)
-<<<<<<< HEAD
-    (git-gutter  git-gutter-mode)
-    (git-gutter+ git-gutter+-mode)))
-=======
     (git-gutter  (bound-and-true-p git-gutter-mode))
     (git-gutter+ (bound-and-true-p git-gutter+-mode))))
->>>>>>> syl20bnr/master
 
 (defun spacemacs/vcs-margin-global-p ()
   (interactive)

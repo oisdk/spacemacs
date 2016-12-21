@@ -71,14 +71,7 @@
 ;; load paths
 (mapc 'add-to-load-path
       `(
-<<<<<<< HEAD
-        ,(concat user-emacs-directory "core/")
-        ,(concat user-emacs-directory "core/libs/")
-        ,(concat user-emacs-directory "core/aprilfool/")
-        ,(concat user-dropbox-directory "emacs/")
-=======
         ,spacemacs-core-directory
         ,(concat spacemacs-core-directory "libs/")
         ,(concat spacemacs-core-directory "aprilfool/")
->>>>>>> syl20bnr/master
         ))
