@@ -37,22 +37,6 @@
       (spacemacs/set-leader-keys-for-major-mode 'restclient-mode
         "s" 'restclient-http-send-current-stay-in-window
         "S" 'restclient-http-send-current
-        "r" 'spacemacs/restclient-http-send-current-raw-stay-in-window
+        "r" 'restclient-http-send-current-raw-stay-in-window
         "R" 'restclient-http-send-current-raw
         "y" 'restclient-copy-curl-command))))
-<<<<<<< HEAD
-=======
-
-(defun restclient/post-init-company ()
-  (spacemacs|add-company-hook restclient-mode))
-
-(defun restclient/init-company-restclient ()
-  (use-package company-restclient
-    :defer t
-    :init (push 'company-restclient company-backends-restclient-mode)))
-
-(defun restclient/init-restclient-helm ()
-  (use-package restclient-helm
-    :init (spacemacs/set-leader-keys-for-major-mode 'restclient-mode
-            "ji" 'helm-restclient)))
->>>>>>> syl20bnr/develop

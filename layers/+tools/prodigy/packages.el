@@ -27,6 +27,4 @@
       "L" 'prodigy-start
       "d" 'prodigy-jump-dired
       "g" 'prodigy-jump-magit
-      "Y" 'prodigy-copy-cmd
-      "R" 'revert-buffer)
-    (evil-define-key 'motion prodigy-view-mode-map (kbd "gf") 'find-file-at-point)))
+      "Y" 'prodigy-copy-cmd)))

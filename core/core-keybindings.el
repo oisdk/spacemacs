@@ -120,13 +120,15 @@ minor-mode, the third argument should be non nil."
                     dotspacemacs-major-mode-leader-key))
          (leader2 (when (spacemacs//acceptable-leader-p
                          dotspacemacs-leader-key)
-                    (concat dotspacemacs-leader-key " m")))
+                    (concat dotspacemacs-leader-key
+                            (unless minor " m"))))
          (emacs-leader1 (when (spacemacs//acceptable-leader-p
                                dotspacemacs-major-mode-emacs-leader-key)
                           dotspacemacs-major-mode-emacs-leader-key))
          (emacs-leader2 (when (spacemacs//acceptable-leader-p
                                dotspacemacs-emacs-leader-key)
-                          (concat dotspacemacs-emacs-leader-key " m")))
+                          (concat dotspacemacs-emacs-leader-key
+                                  (unless minor " m"))))
          (leaders (delq nil (list leader1 leader2)))
          (emacs-leaders (delq nil (list emacs-leader1 emacs-leader2))))
     (or (boundp prefix)

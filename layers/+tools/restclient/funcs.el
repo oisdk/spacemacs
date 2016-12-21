@@ -10,6 +10,6 @@
 ;;; License: GPLv3
 
 
-(defun spacemacs/restclient-http-send-current-raw-stay-in-window ()
+(defun restclient-http-send-current-raw-stay-in-window ()
   (interactive)
   (restclient-http-send-current t t))
