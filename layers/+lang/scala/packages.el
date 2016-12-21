@@ -19,6 +19,10 @@
     org
     scala-mode
     sbt-mode
+<<<<<<< HEAD
+    scala-mode
+=======
+>>>>>>> syl20bnr/master
     ))
 
 (defun scala/init-ensime ()
@@ -152,7 +156,10 @@
         "ns"     'ensime
         "nS"     'ensime-gen-and-restart
 
+<<<<<<< HEAD
+=======
         "ra"     'ensime-refactor-add-type-annotation
+>>>>>>> syl20bnr/master
         "rd"     'ensime-refactor-diff-inline-local
         "rD"     'ensime-undo-peek
         "rf"     'ensime-format-source

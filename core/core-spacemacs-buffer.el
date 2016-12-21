@@ -8,7 +8,11 @@
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
+<<<<<<< HEAD
+(defconst spacemacs-buffer-version-info "0.105"
+=======
 (defconst spacemacs-buffer-version-info "0.200"
+>>>>>>> syl20bnr/master
   "Current version used to display addition release information.")
 
 (defconst spacemacs-buffer-name "*spacemacs*"
@@ -17,10 +21,13 @@
 (defconst spacemacs-buffer-logo-title "[S P A C E M A C S]"
   "The title displayed beneath the logo.")
 
+<<<<<<< HEAD
+=======
 (defconst spacemacs-buffer-buttons-startup-lists-offset 25
   "Relative position in characters of the home buffer buttons and the home
  buffer startup lists.")
 
+>>>>>>> syl20bnr/master
 (defconst spacemacs-buffer--banner-length 75
   "Width of a banner.")
 
@@ -61,9 +68,14 @@ version the release note it displayed")
     (define-key map (kbd "C-i") 'widget-forward)
 
     (define-key map [backtab] 'widget-backward)
+<<<<<<< HEAD
+    (define-key map (kbd "RET") 'widget-button-press)
+    (define-key map [down-mouse-1] 'widget-button-click)
+=======
     (define-key map (kbd "K") 'widget-backward)
 
     (define-key map (kbd "C-r") 'spacemacs-buffer/refresh)
+>>>>>>> syl20bnr/master
     (define-key map "q" 'quit-window)
     map)
   "Keymap for spacemacs buffer mode.")
@@ -79,6 +91,11 @@ version the release note it displayed")
   :group 'spacemacs
   :syntax-table nil
   :abbrev-table nil
+<<<<<<< HEAD
+  (setq buffer-read-only t
+        truncate-lines t)
+=======
+>>>>>>> syl20bnr/master
   (page-break-lines-mode)
   (setq buffer-read-only t
         truncate-lines t)
@@ -123,6 +140,31 @@ Cate special text banner can de reachable via `998', `cat' or `random*'.
           (spacemacs-buffer/insert-ascii-banner-centered banner))
         (spacemacs-buffer//inject-version))
       (spacemacs-buffer//insert-buttons)
+<<<<<<< HEAD
+      (if (file-exists-p spacemacs-buffer--cache-file)
+          (load spacemacs-buffer--cache-file)
+        (unless (file-exists-p dotspacemacs-filepath)
+          ;; fresh install of spacemacs, the release notes are not displayed
+          (setq spacemacs-buffer--release-note-version spacemacs-version)
+          (spacemacs/dump-vars-to-file
+           '(spacemacs-buffer--release-note-version) spacemacs-buffer--cache-file)))
+      ;; if there is no installed dotfile we assume the user is
+      ;; new to spacemacs and open the quickhelp
+      (when (not (file-exists-p dotspacemacs-filepath))
+        (spacemacs-buffer/toggle-note (concat spacemacs-info-directory "quickhelp.txt")
+                                      (spacemacs-buffer//insert-note-p 'quickhelp)))
+      ;; if there is an installed dotfile we check the variable
+      ;; spacemacs-buffer--release-note-version to decide whether
+      ;; we show the release note
+      (when (and (file-exists-p dotspacemacs-filepath)
+                 (or (not spacemacs-buffer--release-note-version)
+                     (version< spacemacs-buffer--release-note-version
+                               spacemacs-version)))
+        (spacemacs-buffer/toggle-note
+         (concat spacemacs-release-notes-directory
+                 spacemacs-buffer-version-info ".txt") 'release-note))
+=======
+>>>>>>> syl20bnr/master
       (spacemacs//redisplay))))
 
 (defun spacemacs-buffer/display-info-box ()
@@ -208,8 +250,13 @@ If ALL is non-nil then truly all banners can be selected."
       (insert (make-string left-margin ?\ ))
       (insert-image spec)
       (insert "\n\n")
+<<<<<<< HEAD
+      (insert (make-string (floor (/ (- spacemacs-buffer--banner-length
+                                        (+ (length title) 1)) 2)) ?\ ))
+=======
       (insert (make-string (max 0 (floor (/ (- spacemacs-buffer--banner-length
                                         (+ (length title) 1)) 2))) ?\ ))
+>>>>>>> syl20bnr/master
       (insert (format "%s\n\n" title)))))
 
 (defun spacemacs-buffer//inject-version ()
@@ -375,7 +422,11 @@ If TYPE is nil, just remove widgets."
                            :action
                            (lambda (&rest ignore)
                              (funcall 'spacemacs/view-org-file
+<<<<<<< HEAD
+                                      (concat user-emacs-directory
+=======
                                       (concat spacemacs-start-directory
+>>>>>>> syl20bnr/master
                                               "CHANGELOG.org")
                                       (format "Release %s.x"
                                               spacemacs-buffer-version-info)
@@ -574,6 +625,87 @@ border."
     (end-of-line)))
 
 (defun spacemacs-buffer//insert-buttons ()
+<<<<<<< HEAD
+  (goto-char (point-max))
+  (insert "     ")
+  (spacemacs//insert--shortcut "m" "[?]" t)
+  (widget-create 'url-link
+                 :tag (propertize "?" 'face 'font-lock-doc-face)
+                 :help-echo "Open the quickhelp."
+                 :action (lambda (&rest ignore)
+                           (spacemacs-buffer/toggle-note (concat spacemacs-info-directory "quickhelp.txt")
+                                                         ;; if nil is returned, just delete the current note widgets
+                                                         (spacemacs-buffer//insert-note-p 'quickhelp)))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 )
+  (insert " ")
+  (widget-create 'url-link
+                 :tag (propertize "Homepage" 'face 'font-lock-keyword-face)
+                 :help-echo "Open the Spacemacs Github page in your browser."
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 "http://spacemacs.org")
+  (insert " ")
+  (widget-create 'url-link
+                 :tag (propertize "Documentation" 'face 'font-lock-keyword-face)
+                 :help-echo "Open the Spacemacs documentation in your browser."
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 "http://spacemacs.org/doc/DOCUMENTATION.html")
+  (insert " ")
+  (widget-create 'url-link
+                 :tag (propertize "Gitter Chat" 'face 'font-lock-keyword-face)
+                 :help-echo "Ask questions and chat with fellow users in our chat room."
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 "https://gitter.im/syl20bnr/spacemacs")
+  (insert " ")
+  (widget-create 'push-button
+                 :help-echo "Update Spacemacs core and layers."
+                 :action (lambda (&rest ignore) (spacemacs/switch-to-version))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 (propertize "Update Spacemacs" 'face 'font-lock-keyword-face))
+  (insert "\n               ")
+  (widget-create 'push-button
+                 :help-echo "Update all ELPA packages to the latest versions."
+                 :action (lambda (&rest ignore) (configuration-layer/update-packages))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 (propertize "Update Packages" 'face 'font-lock-keyword-face))
+  (insert " ")
+  (widget-create 'push-button
+                 :help-echo "Rollback ELPA package updates if something got borked."
+                 :action (lambda (&rest ignore) (call-interactively 'configuration-layer/rollback))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 (propertize "Rollback Package Update" 'face 'font-lock-keyword-face))
+  (insert "\n")
+  (insert "                  ")
+  (widget-create 'push-button
+                 :tag (propertize "Release Notes" 'face 'font-lock-preprocessor-face)
+                 :help-echo "Hide or show the Changelog"
+                 :action (lambda (&rest ignore)
+                           (spacemacs-buffer/toggle-note
+                            (concat spacemacs-release-notes-directory
+                                    spacemacs-buffer-version-info
+                                    ".txt")
+                            ;; if nil is returned,
+                            ;; just delete the current note widgets
+                            (spacemacs-buffer//insert-note-p 'release-note)))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m"
+                 )
+  (insert " ")
+  (widget-create 'url-link
+                 :tag (propertize "Search in Spacemacs" 'face 'font-lock-function-name-face)
+                 :help-echo "Find Spacemacs package and layer configs using helm-spacemacs."
+                 :action (lambda (&rest ignore) (call-interactively 'helm-spacemacs))
+                 :mouse-face 'highlight
+                 :follow-link "\C-m")
+  (insert "\n\n"))
+=======
     (goto-char (point-max))
     (spacemacs//insert--shortcut "m" "[?]" t)
     (widget-create 'url-link
@@ -690,6 +822,7 @@ border."
                  (insert "      "))
                (buffer-string))))
           list)))
+>>>>>>> syl20bnr/master
 
 (defun spacemacs-buffer//insert-file-list (list-display-name list)
   (when (car list)
@@ -724,6 +857,8 @@ border."
                                  (format "%s - %s"
                                          el (abbreviate-file-name filename))
                                (format "%s" el)))))
+<<<<<<< HEAD
+=======
           list)))
 
 (defun spacemacs-buffer//get-org-items (types)
@@ -815,6 +950,7 @@ border."
                                                (cdr (assoc "time" el)))
                                      "-")
                                    (cdr (assoc "text" el)))))
+>>>>>>> syl20bnr/master
           list)))
 
 (defun spacemacs//subseq (seq start end)
@@ -931,7 +1067,10 @@ list. Return entire list if `END' is omitted."
   (with-current-buffer (get-buffer spacemacs-buffer-name)
     (when dotspacemacs-startup-lists
       (spacemacs-buffer/insert-startupify-lists))
+<<<<<<< HEAD
+=======
     (spacemacs-buffer//insert-footer)
+>>>>>>> syl20bnr/master
     (if configuration-layer-error-count
         (progn
           (spacemacs-buffer-mode)
@@ -947,6 +1086,31 @@ list. Return entire list if `END' is omitted."
     (force-mode-line-update)
     (spacemacs-buffer/goto-link-line)))
 
+<<<<<<< HEAD
+(defun spacemacs-buffer/goto-buffer ()
+  "Create the special buffer for `spacemacs-buffer-mode' if it doesn't
+already exist, and switch to it."
+  (interactive)
+  (unless (buffer-live-p (get-buffer spacemacs-buffer-name))
+    (with-current-buffer (get-buffer-create spacemacs-buffer-name)
+      (save-excursion
+        (spacemacs-buffer/set-mode-line "")
+        ;; needed in case the buffer was deleted and we are recreating it
+        (setq spacemacs-buffer--note-widgets nil)
+        (spacemacs-buffer/insert-banner-and-buttons)
+        ;; non-nil if emacs is loaded
+        (if after-init-time
+            (progn
+              (when dotspacemacs-startup-lists
+                (spacemacs-buffer/insert-startupify-lists))
+              (spacemacs-buffer/set-mode-line spacemacs--default-mode-line)
+              (force-mode-line-update)
+              (spacemacs-buffer-mode))
+          (add-hook 'emacs-startup-hook 'spacemacs-buffer//startup-hook t)))))
+  (spacemacs-buffer/goto-link-line)
+  (switch-to-buffer spacemacs-buffer-name)
+  (spacemacs//redisplay))
+=======
 (defvar spacemacs-buffer--last-width nil
   "Previous width of spacemacs-buffer")
 
@@ -1020,5 +1184,6 @@ Useful for making the home buffer the only visible buffer in the frame."
   (interactive)
   (spacemacs/home)
   (delete-other-windows))
+>>>>>>> syl20bnr/master
 
 (provide 'core-spacemacs-buffer)

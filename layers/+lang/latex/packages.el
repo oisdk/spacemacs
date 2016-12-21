@@ -116,6 +116,21 @@
         "xfa" 'latex/font-calligraphic
         "xfn" 'latex/font-normal
         "xfu" 'latex/font-upright)
+<<<<<<< HEAD
+      (spacemacs/declare-prefix-for-mode 'latex-mode "mp"  "preview"))))
+
+
+(when (string= latex-build-command "LatexMk")
+  (defun latex/init-auctex-latexmk ()
+    (use-package auctex-latexmk
+      :defer t
+      :init
+      (progn
+        (setq auctex-latexmk-inherit-TeX-PDF-mode t)
+        (spacemacs|use-package-add-hook tex
+          :post-config
+          (auctex-latexmk-setup))))))
+=======
       (spacemacs/declare-prefix-for-mode 'latex-mode "mi" "insert")
       (spacemacs/declare-prefix-for-mode 'latex-mode "mp" "preview")
       (spacemacs/declare-prefix-for-mode 'latex-mode "mf" "fill"))))
@@ -152,6 +167,7 @@
 
 (defun latex/post-init-flyspell ()
   (spell-checking/add-flyspell-hook 'LaTeX-mode-hook))
+>>>>>>> syl20bnr/master
 
 (defun latex/init-reftex ()
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)

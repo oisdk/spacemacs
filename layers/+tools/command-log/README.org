@@ -1,4 +1,8 @@
 #+TITLE: command-log layer
+<<<<<<< HEAD
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../../css/readtheorg.css" />
+=======
+>>>>>>> syl20bnr/master
 
 * Table of Contents                                        :TOC_4_gh:noexport:
  - [[#description][Description]]

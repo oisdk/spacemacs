@@ -68,8 +68,12 @@ A COUNT argument matches the indentation to the next COUNT lines."
     makefile-bsdmake-mode
     makefile-gmake-mode
     makefile-imake-mode
+<<<<<<< HEAD:layers/+distribution/spacemacs-base/funcs.el
+    python-mode)
+=======
     python-mode
     yaml-mode)
+>>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/funcs.el
   "Modes for which auto-indenting is suppressed.")
 
 (defcustom spacemacs-yank-indent-threshold 1000
@@ -112,6 +116,26 @@ automatically applied to."
       (window-configuration-to-register ?_)
       (delete-other-windows))))
 
+<<<<<<< HEAD:layers/+distribution/spacemacs-base/funcs.el
+;; A small minor mode to use a big fringe adapted from
+;; http://bzg.fr/emacs-strip-tease.html
+(define-minor-mode spacemacs-centered-buffer-mode
+  "Minor mode to use big fringe in the current buffer."
+  :global t
+  :init-value nil
+  :group 'editing-basics
+  (if spacemacs-centered-buffer-mode
+      (progn
+        (window-configuration-to-register ?_)
+        (delete-other-windows)
+        (set-fringe-mode
+         (/ (- (frame-pixel-width)
+               (* 100 (frame-char-width)))
+            2)))
+    (set-fringe-style nil)
+    (when (assoc ?_ register-alist)
+      (jump-to-register ?_))))
+=======
 ;; https://tsdh.wordpress.com/2007/03/28/deleting-windows-vertically-or-horizontally/
 (defun spacemacs/maximize-horizontally ()
   "Delete all windows left or right of the current window."
@@ -122,6 +146,7 @@ automatically applied to."
       (delete-window))
     (while (condition-case nil (windmove-right) (error nil))
       (delete-window))))
+>>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/funcs.el
 
 (defun spacemacs/toggle-centered-buffer-mode ()
   "Toggle `spacemacs-centered-buffer-mode'."
@@ -297,9 +322,12 @@ projectile cache when it's possible and update recentf list."
                (when (fboundp 'recentf-add-file)
                    (recentf-add-file new-name)
                    (recentf-remove-if-non-kept filename))
+<<<<<<< HEAD:layers/+distribution/spacemacs-base/funcs.el
+=======
                (when (and (configuration-layer/package-usedp 'projectile)
                           (projectile-project-p))
                  (call-interactively #'projectile-invalidate-cache))
+>>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/funcs.el
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
 
 (defun spacemacs/delete-file (filename &optional ask-user)
@@ -498,6 +526,19 @@ If the universal prefix argument is used then will the windows too."
   (delete-other-windows)
   (split-window-right))
 
+<<<<<<< HEAD:layers/+distribution/spacemacs-base/funcs.el
+(defalias 'spacemacs/home 'spacemacs-buffer/goto-buffer
+  "Go to home Spacemacs buffer")
+
+(defun spacemacs/home-delete-other-windows ()
+  "Open home Spacemacs buffer and delete other windows.
+Useful for making the home buffer the only visible buffer in the frame."
+  (interactive)
+  (spacemacs/home)
+  (delete-other-windows))
+
+=======
+>>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/funcs.el
 (defun spacemacs/insert-line-above-no-indent (count)
   "Insert a new line above with no indentation."
   (interactive "p")
@@ -656,9 +697,48 @@ The body of the advice is in BODY."
   (interactive)
   (save-buffer)
   (load-file (buffer-file-name))
+<<<<<<< HEAD:layers/+distribution/spacemacs-base/funcs.el
+  (ert t))
+
+(defun spacemacs/alternate-buffer ()
+  "Switch back and forth between current and last buffer in the
+current window."
+  (interactive)
+  (if (evil-alternate-buffer)
+      (switch-to-buffer (car (evil-alternate-buffer)))
+    (switch-to-buffer (other-buffer (current-buffer) t))))
+
+(defun current-line ()
+  "Return the line at point as a string."
+  (buffer-substring (line-beginning-position) (line-end-position)))
+
+(defun spacemacs/open-in-external-app ()
+  "Open current file in external application."
+  (interactive)
+  (let ((file-path (if (eq major-mode 'dired-mode)
+                       (dired-get-file-for-visit)
+                     (buffer-file-name))))
+    (if file-path
+        (cond
+         ((spacemacs/system-is-mswindows) (w32-shell-execute "open" (replace-regexp-in-string "/" "\\\\" file-path)))
+         ((spacemacs/system-is-mac) (shell-command (format "open \"%s\"" file-path)))
+         ((spacemacs/system-is-linux) (let ((process-connection-type nil))
+                              (start-process "" nil "xdg-open" file-path))))
+      (message "No file associated to this buffer."))))
+
+(defun spacemacs/next-error (&optional n reset)
+  "Dispatch to flycheck or standard emacs error."
+  (interactive "P")
+  (if (and (boundp 'flycheck-mode)
+           (symbol-value flycheck-mode)
+           (not (get-buffer-window "*compilation*")))
+      (call-interactively 'flycheck-next-error)
+    (call-interactively 'next-error)))
+=======
   (let ((cbuf (current-buffer)))
     (ert '(satisfies (lambda (test)
                        (eq cbuf (spacemacs//find-ert-test-buffer test)))))))
+>>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/funcs.el
 
 (defun spacemacs//open-in-external-app (file-path)
   "Open `file-path' in external application."
@@ -673,6 +753,13 @@ The body of the advice is in BODY."
 If the universal prefix argument is used then open the folder
 containing the current file by the default explorer."
   (interactive "P")
+<<<<<<< HEAD:layers/+distribution/spacemacs-base/funcs.el
+  (if (and (boundp 'flycheck-mode)
+           (symbol-value flycheck-mode)
+           (not (get-buffer-window "*compilation*")))
+      (call-interactively 'flycheck-previous-error)
+    (call-interactively 'previous-error)))
+=======
   (if arg
       (spacemacs//open-in-external-app (expand-file-name default-directory))
     (let ((file-path (if (derived-mode-p 'dired-mode)
@@ -681,6 +768,7 @@ containing the current file by the default explorer."
       (if file-path
           (spacemacs//open-in-external-app file-path)
         (message "No file associated to this buffer.")))))
+>>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/funcs.el
 
 (defun spacemacs/switch-to-minibuffer-window ()
   "switch to minibuffer window (if active)"
@@ -968,6 +1056,17 @@ a split-side entry, its value must be usable as the SIDE argument for
                (not (eq major-mode dotspacemacs-scratch-mode))
                (fboundp dotspacemacs-scratch-mode))
       (funcall dotspacemacs-scratch-mode))))
+<<<<<<< HEAD:layers/+distribution/spacemacs-base/funcs.el
+
+;; http://stackoverflow.com/questions/11847547/emacs-regexp-count-occurrences
+(defun how-many-str (regexp str)
+  (loop with start = 0
+        for count from 0
+        while (string-match regexp str start)
+        do (setq start (match-end 0))
+        finally return count))
+=======
+>>>>>>> syl20bnr/master:layers/+distributions/spacemacs-base/funcs.el
 
 (defun spacemacs/close-compilation-window ()
   "Close the window containing the '*compilation*' buffer."

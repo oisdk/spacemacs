@@ -72,25 +72,40 @@
                                            ".python-version")))
     (when root-path
       (let* ((file-path (expand-file-name ".python-version" root-path))
+<<<<<<< HEAD
+             (version (with-temp-buffer
+                        (insert-file-contents-literally file-path)
+                        (buffer-substring-no-properties (line-beginning-position)
+                                                        (line-end-position)))))
+=======
              (version
               (with-temp-buffer
                 (insert-file-contents-literally file-path)
                 (buffer-substring-no-properties (line-beginning-position)
                                                 (line-end-position)))))
+>>>>>>> syl20bnr/master
         (if (member version (pyenv-mode-versions))
             (pyenv-mode-set version)
           (message "pyenv: version `%s' is not installed (set by %s)"
                    version file-path))))))
 
+<<<<<<< HEAD
+=======
 
 ;; Tests
 
+>>>>>>> syl20bnr/master
 (defun spacemacs//disable-semantic-idle-summary-mode ()
   "Disable semantic-idle-summary in Python mode.
 Anaconda provides more useful information but can not do it properly
 when this mode is enabled since the minibuffer is cleared all the time."
   (semantic-idle-summary-mode 0))
 
+<<<<<<< HEAD
+(defun spacemacs//python-imenu-create-index-use-semantic ()
+  "Use semantic if the layer is enabled."
+  (setq imenu-create-index-function 'semantic-create-imenu-index))
+=======
 (defun spacemacs//python-imenu-create-index-use-semantic-maybe ()
   "Use semantic if the layer is enabled."
   (setq imenu-create-index-function 'spacemacs/python-imenu-create-index))
@@ -195,3 +210,4 @@ to be called for each testrunner. "
   (when (and python-sort-imports-on-save
              (derived-mode-p 'python-mode))
     (py-isort-before-save)))
+>>>>>>> syl20bnr/master

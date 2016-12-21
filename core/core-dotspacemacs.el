@@ -101,11 +101,18 @@ packages then consider to create a layer, you can also put the
 configuration in `dotspacemacs/user-config'.")
 
 (defvar dotspacemacs-editing-style 'vim
+<<<<<<< HEAD
+  "One of `vim', `emacs' or `hybrid'. Evil is always enabled but if the
+variable is `emacs' then the `holy-mode' is enabled at startup. `hybrid'
+uses emacs key bindings for vim's insert mode, but otherwise leaves evil
+unchanged.")
+=======
   "One of `vim', `emacs' or `hybrid'.
 `hybrid' is like `vim' except that `insert state' is replaced by the
 `hybrid state' with `emacs' key bindings. The value can also be a list
  with `:variables' keyword (similar to layers). Check the editing styles
  section of the documentation for details on available variables.")
+>>>>>>> syl20bnr/master
 
 (defvar dotspacemacs-startup-banner 'official
    "Specify the startup banner. Default value is `official', it displays
@@ -117,7 +124,11 @@ If the value is nil then no banner is displayed.")
 (defvar dotspacemacs-scratch-mode 'text-mode
   "Default major mode of the scratch buffer.")
 
+<<<<<<< HEAD
+(defvar dotspacemacs-check-for-update t
+=======
 (defvar dotspacemacs-check-for-update nil
+>>>>>>> syl20bnr/master
   "If non nil then spacemacs will check for updates at startup
 when the current branch is not `develop'. Note that checking for
 new versions works via git commands, thus it calls GitHub services
@@ -711,7 +722,11 @@ error recovery."
   "Test settings in dotfile for correctness.
  Return non-nil if all the tests passed."
   (interactive)
+<<<<<<< HEAD
+  (setq configuration-layer-paths (configuration-layer//discover-layers))
+=======
   (configuration-layer/discover-layers)
+>>>>>>> syl20bnr/master
   (let ((min-version "0.0"))
     ;; dotspacemacs-version not implemented yet
     ;; (if (version< dotspacemacs-version min-version)

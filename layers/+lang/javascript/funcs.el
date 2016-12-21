@@ -9,6 +9,9 @@
 ;;
 ;;; License: GPLv3
 
+<<<<<<< HEAD
+(defun javascript//tern-detect ()
+=======
 
 ;; tern
 
@@ -24,6 +27,7 @@
     "ht" 'tern-get-type))
 
 (defun spacemacs//tern-detect ()
+>>>>>>> syl20bnr/master
   "Detect tern binary and warn if not found."
   (let ((found (executable-find "tern")))
     (unless found

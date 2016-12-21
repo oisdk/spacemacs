@@ -157,6 +157,10 @@
 (defun ruby/init-rspec-mode ()
   (use-package rspec-mode
     :defer t
+<<<<<<< HEAD
+    ;; there is no :init block to add the hooks since rspec-mode
+    ;; setup the hook via an autoload
+=======
     :init
     (progn
       (spacemacs/add-to-hooks 'spacemacs//ruby-enable-rspec-mode
@@ -167,6 +171,7 @@
       ;; loaded based on the layer variable `ruby-test-runner'
       (dolist (hook '(ruby-mode-hook enh-ruby-mode-hook))
         (remove-hook hook 'rspec-enable-appropriate-mode)))
+>>>>>>> syl20bnr/master
     :config
     (progn
       (add-hook 'rspec-compilation-mode-hook 'spacemacs//inf-ruby-auto-enter)

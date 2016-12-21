@@ -1,5 +1,9 @@
 <a name="top"></a>
+<<<<<<< HEAD
+<a href="http://github.com/syl20bnr/spacemacs"><img src="https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg" alt="Made with Spacemacs"></a><a href="http://www.twitter.com/spacemacs"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a><br>
+=======
 <a href="http://spacemacs.org"><img src="https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg" alt="Made with Spacemacs"></a><a href="http://www.twitter.com/spacemacs"><img src="http://i.imgur.com/tXSoThF.png" alt="Twitter" align="right"></a><br>
+>>>>>>> syl20bnr/master
 ***
 <p align="center"><img src="/doc/img/title2.png" alt="Spacemacs"/></p>
 <p align="center">
@@ -9,7 +13,11 @@
 |
 <b><a href="http://spacemacs.org/doc/DOCUMENTATION#orgheadline7">screenshots</a></b>
 |
+<<<<<<< HEAD
+<b><a href="http://spacemacs.org/doc/DOCUMENTATION">documentation</a></b>
+=======
 <b><a href="http://spacemacs.org/doc/DOCUMENTATION.html">documentation</a></b>
+>>>>>>> syl20bnr/master
 |
 <b><a href="CONTRIBUTING.org">contribute</a></b>
 |
@@ -23,7 +31,10 @@
 <a href="https://travis-ci.org/syl20bnr/spacemacs"><img src="https://travis-ci.org/syl20bnr/spacemacs.svg" alt="Build Status"></a>
 <a href="https://waffle.io/syl20bnr/spacemacs"><img src="https://badge.waffle.io/syl20bnr/spacemacs.png?label=Merging...&title=Merging" alt="PR being merged"></a>
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ESFVNPKP4Y742"><img src="https://img.shields.io/badge/Paypal-Donate-blue.svg" alt="Donate"></a>
+<<<<<<< HEAD
+=======
 <a href="https://shop.spreadshirt.com/spacemacs-shop"><img src="https://img.shields.io/badge/Shop-T--Shirts-blue.svg" alt="Donate"></a>
+>>>>>>> syl20bnr/master
 <a href="http://www.slant.co/topics/12/~what-are-the-best-programming-text-editors"><img src="https://img.shields.io/badge/Slant-Recommend-ff69b4.svg" alt="Recommend it"></a>
 </p>
 ***
@@ -46,9 +57,13 @@
         - [Windows](#windows)
 - [Install](#install)
     - [Default installation](#default-installation)
+<<<<<<< HEAD
+    - [Installation alongside another configuration](#installation-alongside-another-configuration)
+=======
     - [Alternate installations](#alternate-installations)
         - [Modify HOME environment variable](#modify-home-environment-variable)
         - [Modify spacemacs-start-directory variable](#modify-spacemacs-start-directory-variable)
+>>>>>>> syl20bnr/master
     - [Spacemacs logo](#spacemacs-logo)
 - [Update](#update)
     - [Automatic update (on master branch)](#automatic-update-on-master-branch)
@@ -132,6 +147,23 @@ XEmacs is an old fork of Emacs. The X in its name is unrelated to X11.
 Both Emacs and XEmacs have graphical support.
 
 **Note:** Ubuntu LTS 12.04 and 14.04 repositories have only Emacs 24.3
+<<<<<<< HEAD
+available. You are advised to [build from source][build_source] Emacs 24.4 or
+greater, as most packages require this version. The same may be true for other
+distributions as well.
+
+### OS X
+
+The recommended way of installing Emacs on OS X is using [homebrew][]:
+
+```sh
+$ brew tap d12frosted/emacs-plus
+$ brew install emacs-plus --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-spacemacs-icon
+$ brew linkapps
+```
+
+*Note:* these homebrew commands will install Emacs, and link it to your
+=======
 available. You have to [build from source][build_source] Emacs 24.4 or greater,
 as Spacemacs won't work with 24.3. The same may be true for other distributions
 as well.
@@ -147,6 +179,7 @@ $ brew linkapps emacs-plus
 ```
 
 *Note:* these homebrew commands will install GNU Emacs, and link it to your
+>>>>>>> syl20bnr/master
 `/Applications` directory. You still need to run the `git clone` mentioned at
 the start of this file. That will populate your `~/.emacs.d` directory, which is
 what transforms a regular GNU Emacs into Spacemacs.
@@ -161,6 +194,14 @@ information.
 also recommended to add the [osx layer][] to your [dotfile][]. Install
 instructions are available in the [osx layer][] documentation.
 
+<<<<<<< HEAD
+*Note:* the proposed `emacs-plus` tap is indentical to the `emacs` formulae,
+it just defines some additional options like `--with-spacemacs-icon`.
+
+*Note:* after you have completed the [install process below](#install), it is
+also recommended to add the [osx layer][] to your [dotfile][]. Install
+instructions are available in the [osx layer][] documentation.
+=======
 *Note:* if the powerline separators on the spaceline are a different (less
 saturated) color than the rest of the line, you can add following snippet to
 `dotspacemacs/user-config` in your `.spacemacs` file.
@@ -181,6 +222,7 @@ powerline separator put following snippet in `dotspacemacs/user-config`.
 
 For more information about powerline separators, please refer to appropriate
 section in [Documentation][DOCUMENTATION.org].
+>>>>>>> syl20bnr/master
 
 ### Windows
 
@@ -247,6 +289,24 @@ For efficient searches we recommend to install `pt` ([the platinum searcher][]).
    emacs --insecure
    ```
 
+<<<<<<< HEAD
+   You may wish to clear out your `.emacs.d/elpa` directory before doing this,
+   so that any corrupted packages you may have downloaded will be reinstalled.
+
+4. Restart Emacs to complete the installation.
+
+If the mode-line turns red then be sure to consult the [FAQ][FAQ.org].
+
+## Installation alongside another configuration
+
+To try out Spacemacs (or any other Emacs configuration you desire) without
+having to go through the trouble of backing up you `~/.emacs.d` directory and
+then cloning the new configuration:
+
+```sh
+mkdir ~/spacemacs
+git clone git@github.com:syl20bnr/spacemacs.git ~/spacemacs/.emacs.d
+=======
    Or you can set the `dotspacemacs-elpa-https` to `nil` in your dotfile to
    remove the need to start Emacs with `--insecure` argument. You may wish to
    clear out your `.emacs.d/elpa` directory before doing this, so that any
@@ -271,11 +331,14 @@ existing configuration.
 ```sh
 mkdir ~/spacemacs
 git clone https://github.com/syl20bnr/spacemacs.git ~/spacemacs/.emacs.d
+>>>>>>> syl20bnr/master
 HOME=~/spacemacs emacs
 ```
 
 Note: If you're on Fish shell, you will need to modify the last command to: `env
 HOME=$HOME/spacemacs emacs`
+<<<<<<< HEAD
+=======
 
 ### Modify spacemacs-start-directory variable
 
@@ -287,6 +350,7 @@ Say you cloned Spacemacs in `~/.emacs.d/spacemacs/` then drop these lines in
 (setq spacemacs-start-directory "~/.emacs.d/spacemacs/")
 (load-file (concat spacemacs-start-directory "init.el"))
 ```
+>>>>>>> syl20bnr/master
 
 ## Spacemacs logo
 
@@ -355,12 +419,15 @@ branch, for instance to revert to the last `0.103`:
 
     «I feel that spacemacs is an aircraft carrier and I am playing table tennis on the deck as a freerider.»
 
+<<<<<<< HEAD
+=======
 [Quote][quote02] by [deuill](https://github.com/deuill):
 
     «I LOVE SPACEMACS AND MAGIT
 
      That is all»
 
+>>>>>>> syl20bnr/master
 # Contributions
 
 Spacemacs is a community-driven project, it needs _you_ to keep it up to
@@ -395,9 +462,12 @@ For the packages shipped in this repository you can refer to the files header.
 The best way to support Spacemacs is to contribute to it either by reporting
 bugs, helping the community on the [Gitter Chat][] or sending pull requests.
 
+<<<<<<< HEAD
+=======
 You can show your love for the project by getting cool Spacemacs t-shirts, mugs
 and more in the [Spacemacs Shop][].
 
+>>>>>>> syl20bnr/master
 If you want to show your support financially you can contribute to [Bountysource][] or buy a drink for the
 maintainer by clicking on the [Paypal badge](#top).
 
@@ -432,7 +502,11 @@ Thank you!
 [FAQ.org]: http://spacemacs.org/doc/FAQ
 [VIMUSERS.org]: http://spacemacs.org/doc/VIMUSERS
 [dotfile]: http://spacemacs.org/doc/DOCUMENTATION#orgheadline45
+<<<<<<< HEAD
+[osx layer]: http://spacemacs.org/layers/osx/README
+=======
 [osx layer]: http://spacemacs.org/layers/+os/osx/README.html
+>>>>>>> syl20bnr/master
 [Gitter Chat]: https://gitter.im/syl20bnr/spacemacs
 [Gitter Chat IRC server]: https://irc.gitter.im/
 [homebrew]: http://brew.sh
@@ -448,8 +522,13 @@ Thank you!
 [Stack Exchange]: http://emacs.stackexchange.com/questions/tagged/spacemacs
 [Reddit]: https://www.reddit.com/r/spacemacs
 [quote01]: https://gitter.im/syl20bnr/spacemacs?at=568e627a0cdaaa62045a7df6
+<<<<<<< HEAD
+[build_source]: https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html
+[Bountysource]: https://salt.bountysource.com/teams/spacemacs
+=======
 [quote02]: https://gitter.im/syl20bnr/spacemacs?at=5768456c6577f032450cfedb
 [build_source]: https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html
 [Bountysource]: https://salt.bountysource.com/teams/spacemacs
 [Source Code Pro]: https://github.com/adobe-fonts/source-code-pro
 [Spacemacs Shop]: https://shop.spreadshirt.com/spacemacs-shop
+>>>>>>> syl20bnr/master

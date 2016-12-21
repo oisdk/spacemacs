@@ -1317,6 +1317,48 @@ wether the declared layer is an used one or not."
 (defun configuration-layer//install-packages (packages)
   "Install PACKAGES which are not lazy installed."
   (interactive)
+<<<<<<< HEAD
+  (let* ((noinst-pkg-names
+          (configuration-layer//get-uninstalled-packages
+           (mapcar 'car
+                   (object-assoc-list
+                    :name configuration-layer--used-distant-packages))))
+         (noinst-count (length noinst-pkg-names))
+         installed-count)
+    ;; installation
+    (when noinst-pkg-names
+      (spacemacs-buffer/append
+       (format "Found %s new package(s) to install...\n"
+               noinst-count))
+      (configuration-layer/retrieve-package-archives)
+      (setq installed-count 0)
+      (dolist (pkg-name noinst-pkg-names)
+        (setq installed-count (1+ installed-count))
+        (let* ((pkg (object-assoc pkg-name :name configuration-layer--packages))
+               (layer (when pkg (oref pkg :owner)))
+               (location (when pkg (oref pkg :location))))
+          (spacemacs-buffer/replace-last-line
+           (format "--> installing %s: %s%s... [%s/%s]"
+                   (if layer "package" "dependency")
+                   pkg-name (if layer (format "@%S" layer) "")
+                   installed-count noinst-count) t)
+          (unless (package-installed-p pkg-name)
+            (condition-case err
+                (cond
+                 ((or (null pkg) (eq 'elpa location))
+                  (configuration-layer//install-from-elpa pkg-name))
+                 ((and (listp location) (eq 'recipe (car location)))
+                  (configuration-layer//install-from-recipe pkg))
+                 (t (spacemacs-buffer/warning "Cannot install package %S."
+                                              pkg-name)))
+              ('error
+               (configuration-layer//increment-error-count)
+               (spacemacs-buffer/append
+                (format (concat "\nAn error occurred while installing %s "
+                                "(error: %s)\n") pkg-name err))))))
+        (spacemacs//redisplay))
+      (spacemacs-buffer/append "\n"))))
+=======
   ;; Force the display of warning buffers at the bottom
   (let ((display-buffer-alist
          '(("\\(\\*Compile-Log\\*\\)\\|\\(\\*Warnings\\*\\)"
@@ -1342,6 +1384,7 @@ wether the declared layer is an used one or not."
           (configuration-layer//install-package
            (configuration-layer/get-package pkg-name)))
         (spacemacs-buffer/append "\n")))))
+>>>>>>> syl20bnr/master
 
 (defun configuration-layer//install-from-elpa (pkg-name)
   "Install PKG from ELPA."
@@ -1350,6 +1393,15 @@ wether the declared layer is an used one or not."
        (format (concat "\nPackage %s is unavailable. "
                        "Is the package name misspelled?\n")
                pkg-name))
+<<<<<<< HEAD
+    (dolist
+        (dep (configuration-layer//get-package-deps-from-archive
+              pkg-name))
+      (if (package-installed-p (car dep))
+          (configuration-layer//activate-package (car dep))
+        (package-install (car dep))))
+    (package-install pkg-name)))
+=======
     (let ((pkg-desc (assq pkg-name package-archive-contents)))
       (dolist
           (dep (configuration-layer//get-package-deps-from-archive
@@ -1360,6 +1412,7 @@ wether the declared layer is an used one or not."
       (if pkg-desc
           (package-install (cadr pkg-desc))
         (package-install pkg-name)))))
+>>>>>>> syl20bnr/master
 
 (defun configuration-layer//install-from-recipe (pkg)
   "Install PKG from a recipe."
@@ -1501,15 +1554,24 @@ wether the declared layer is an used one or not."
                            (symbol-name (oref pkg :name))))
                   load-path))
            ((eq 'local location)
+<<<<<<< HEAD
+            (let* ((owner (object-assoc (oref pkg :owner)
+                                        :name configuration-layer--layers))
+=======
             (let* ((owner (configuration-layer/get-layer
                            (car (oref pkg :owners))))
+>>>>>>> syl20bnr/master
                    (dir (when owner (oref owner :dir))))
               (push (format "%slocal/%S/" dir pkg-name) load-path)))))
         ;; configuration
         (unless (memq (oref pkg :location) '(local site built-in))
           (configuration-layer//activate-package pkg-name))
         (cond
+<<<<<<< HEAD
+         ((eq 'dotfile (oref pkg :owner))
+=======
          ((eq 'dotfile (car (oref pkg :owners)))
+>>>>>>> syl20bnr/master
           (spacemacs-buffer/message
            (format "%S is configured in the dotfile." pkg-name)))
          (t
@@ -1531,6 +1593,23 @@ LAYER must not be the owner of PKG."
          (owner (car (oref pkg :owners))))
     (spacemacs-buffer/message (format "Configuring %S..." pkg-name))
     ;; pre-init
+<<<<<<< HEAD
+    (mapc (lambda (layer)
+            (if (memq layer disabled-for-layers)
+                (spacemacs-buffer/message
+                 (format "  -> ignored pre-init (%S)..." layer))
+              (spacemacs-buffer/message
+               (format "  -> pre-init (%S)..." layer))
+              (condition-case-unless-debug err
+                  (funcall (intern (format "%S/pre-init-%S" layer pkg-name)))
+                ('error
+                 (configuration-layer//increment-error-count)
+                 (spacemacs-buffer/append
+                  (format
+                   (concat "\nAn error occurred while pre-configuring %S "
+                           "in layer %S (error: %s)\n")
+                   pkg-name layer err))))))
+=======
     (mapc
      (lambda (layer)
        (when (configuration-layer/layer-usedp layer)
@@ -1548,11 +1627,29 @@ LAYER must not be the owner of PKG."
                 (concat "\nAn error occurred while pre-configuring %S "
                         "in layer %S (error: %s)\n")
                 pkg-name layer err)))))))
+>>>>>>> syl20bnr/master
           (oref pkg :pre-layers))
     ;; init
     (spacemacs-buffer/message (format "  -> init (%S)..." owner))
     (funcall (intern (format "%S/init-%S" owner pkg-name)))
     ;; post-init
+<<<<<<< HEAD
+    (mapc (lambda (layer)
+            (if (memq layer disabled-for-layers)
+                (spacemacs-buffer/message
+                 (format "  -> ignored post-init (%S)..." layer))
+              (spacemacs-buffer/message
+               (format "  -> post-init (%S)..." layer))
+              (condition-case-unless-debug err
+                  (funcall (intern (format "%S/post-init-%S" layer pkg-name)))
+                ('error
+                 (configuration-layer//increment-error-count)
+                 (spacemacs-buffer/append
+                  (format
+                   (concat "\nAn error occurred while post-configuring %S "
+                           "in layer %S (error: %s)\n")
+                   pkg-name layer err))))))
+=======
     (mapc
      (lambda (layer)
        (when (configuration-layer/layer-usedp layer)
@@ -1570,6 +1667,7 @@ LAYER must not be the owner of PKG."
                 (concat "\nAn error occurred while post-configuring %S "
                         "in layer %S (error: %s)\n")
                 pkg-name layer err)))))))
+>>>>>>> syl20bnr/master
           (oref pkg :post-layers))))
 
 (defun configuration-layer//cleanup-rollback-directory ()
@@ -1626,11 +1724,16 @@ If called with a prefix argument ALWAYS-UPDATE, assume yes to update."
                          ":\n"))
                upgrade-count) t)
       (mapc (lambda (x)
+<<<<<<< HEAD
+              (spacemacs-buffer/append (format "%s\n" x) t))
+            update-packages)
+=======
               (spacemacs-buffer/append
                (format (if (memq (intern x) dotspacemacs-frozen-packages)
                            "%s (won't be updated because package is frozen)\n"
                          "%s\n") x) t))
             (sort (mapcar 'symbol-name update-packages) 'string<))
+>>>>>>> syl20bnr/master
       (if (and (not always-update)
                (not (yes-or-no-p
                      (format "Do you want to update %s package(s) ? "
@@ -1642,6 +1745,16 @@ If called with a prefix argument ALWAYS-UPDATE, assume yes to update."
          "--> performing backup of package(s) to update...\n" t)
         (spacemacs//redisplay)
         (dolist (pkg update-packages)
+<<<<<<< HEAD
+          (let* ((src-dir (configuration-layer//get-package-directory pkg))
+                 (dest-dir (expand-file-name
+                            (concat rollback-dir
+                                    (file-name-as-directory
+                                     (file-name-nondirectory src-dir))))))
+            (copy-directory src-dir dest-dir 'keeptime 'create 'copy-content)
+            (push (cons pkg (file-name-nondirectory src-dir))
+                  update-packages-alist)))
+=======
           (unless (memq pkg dotspacemacs-frozen-packages)
             (let* ((src-dir (configuration-layer//get-package-directory pkg))
                    (dest-dir (expand-file-name
@@ -1651,11 +1764,24 @@ If called with a prefix argument ALWAYS-UPDATE, assume yes to update."
               (copy-directory src-dir dest-dir 'keeptime 'create 'copy-content)
               (push (cons pkg (file-name-nondirectory src-dir))
                     update-packages-alist))))
+>>>>>>> syl20bnr/master
         (spacemacs/dump-vars-to-file
          '(update-packages-alist)
          (expand-file-name (concat rollback-dir
                                    configuration-layer-rollback-info)))
         (dolist (pkg update-packages)
+<<<<<<< HEAD
+          (setq upgraded-count (1+ upgraded-count))
+          (spacemacs-buffer/replace-last-line
+           (format "--> preparing update of package %s... [%s/%s]"
+                   pkg upgraded-count upgrade-count) t)
+          (spacemacs//redisplay)
+          (configuration-layer//package-delete pkg))
+        (spacemacs-buffer/append
+         (format "\n--> %s package(s) to be updated.\n" upgraded-count))
+        (spacemacs-buffer/append
+         "\nEmacs has to be restarted to actually install the new packages.\n")
+=======
           (unless (memq pkg dotspacemacs-frozen-packages)
             (setq upgraded-count (1+ upgraded-count))
             (spacemacs-buffer/replace-last-line
@@ -1668,6 +1794,7 @@ If called with a prefix argument ALWAYS-UPDATE, assume yes to update."
         (spacemacs-buffer/append
          (concat "\nEmacs has to be restarted to actually install the "
                  "new version of the packages (SPC q r).\n"))
+>>>>>>> syl20bnr/master
         (configuration-layer//cleanup-rollback-directory)
         (spacemacs//redisplay)))
     (when (eq upgrade-count 0)
@@ -1752,8 +1879,16 @@ to select one."
 
 (defun configuration-layer//activate-package (pkg)
   "Activate PKG."
+<<<<<<< HEAD
+  (if (version< emacs-version "24.3.50")
+      ;; fake version list to always activate the package
+      (package-activate pkg '(0 0 0 0))
+    (unless (memq pkg package-activated-list)
+      (package-activate pkg))))
+=======
   (unless (memq pkg package-activated-list)
     (package-activate pkg)))
+>>>>>>> syl20bnr/master
 
 (defun configuration-layer//get-packages-dependencies ()
   "Returns dependencies hash map for all packages in `package-alist'."
@@ -1892,6 +2027,12 @@ to select one."
           (spacemacs-buffer/append "\n"))
       (spacemacs-buffer/message "No orphan package to delete."))))
 
+<<<<<<< HEAD
+(defun configuration-layer//increment-error-count ()
+  "Increment the error counter."
+  (if configuration-layer-error-count
+      (setq configuration-layer-error-count (1+ configuration-layer-error-count))
+=======
 (defun configuration-layer//gather-auto-mode-extensions (mode)
   "Return a regular expression matching all the extensions associate to MODE."
   (let (gather-extensions)
@@ -2010,6 +2151,7 @@ FILE-TO-LOAD is an explicit file to load after the installation."
   (if configuration-layer-error-count
       (setq configuration-layer-error-count
             (1+ configuration-layer-error-count))
+>>>>>>> syl20bnr/master
     (setq configuration-layer-error-count 1)))
 
 (provide 'core-configuration-layer)

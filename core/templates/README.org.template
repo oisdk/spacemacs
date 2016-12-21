@@ -1,4 +1,10 @@
 #+TITLE: %LAYER_NAME% layer
+<<<<<<< HEAD
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
+
+#+CAPTION: logo
+=======
+>>>>>>> syl20bnr/master
 
 # The maximum height of the logo should be 200 pixels.
 [[img/%LAYER_NAME%.png]]
@@ -14,9 +20,17 @@ This layer does wonderful things:
   - thing01
 
 * Install
+<<<<<<< HEAD
+To use this contribution add it to your =~/.spacemacs=
+
+#+begin_src emacs-lisp
+  (setq-default dotspacemacs-configuration-layers '(%LAYER_NAME%))
+#+end_src
+=======
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to
 add =%LAYER_NAME%= to the existing =dotspacemacs-configuration-layers= list in this
 file.
+>>>>>>> syl20bnr/master
 
 * Key bindings
 
