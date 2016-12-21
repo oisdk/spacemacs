@@ -1,4 +1,4 @@
-;;; funcs.el --- restclient Layer functions File
+;;; funcs.el --- Markdown Layer Functions File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
@@ -9,7 +9,6 @@
 ;;
 ;;; License: GPLv3
 
-
-(defun spacemacs/restclient-http-send-current-raw-stay-in-window ()
-  (interactive)
-  (restclient-http-send-current t t))
+(defun spacemacs/activate-mmm-mode ()
+  ;; Enable `mmm-mode'.
+  (mmm-mode 1))
