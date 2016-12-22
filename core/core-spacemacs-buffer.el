@@ -101,7 +101,7 @@ version the release note it displayed")
        (goto-char 0)
        (let ((margin (max 0 (floor (/ (- spacemacs-buffer--banner-length banner-width) 2)))))
          (while (not (eobp))
-           (insert (make-string margin ?\ ))
+           (insert (make-string margin ?\s))
            (forward-line 1))))
      (buffer-string))))
 
@@ -205,11 +205,11 @@ If ALL is non-nil then truly all banners can be selected."
            (left-margin (max 0 (floor (- spacemacs-buffer--banner-length width) 2))))
       (goto-char (point-min))
       (insert "\n")
-      (insert (make-string left-margin ?\ ))
+      (insert (make-string left-margin ?\s))
       (insert-image spec)
       (insert "\n\n")
-      (insert (make-string (max 0 (floor (/ (- spacemacs-buffer--banner-length
-                                        (+ (length title) 1)) 2))) ?\ ))
+      (insert (make-string (max 0 (floor (/ (- spacemacs-buffer--window-width
+                                               (+ (length title) 1)) 2))) ?\s))
       (insert (format "%s\n\n" title)))))
 
 (defun spacemacs-buffer//inject-version ()
@@ -217,20 +217,20 @@ If ALL is non-nil then truly all banners can be selected."
 buffer, right justified."
   (with-current-buffer (get-buffer-create spacemacs-buffer-name)
     (save-excursion
-      (let ((maxcol spacemacs-buffer--banner-length)
-            (version (format "%s@%s (%s)"
+      (let ((version (format "%s@%s (%s)"
                              spacemacs-version
                              emacs-version
                              dotspacemacs-distribution))
             (buffer-read-only nil))
         (goto-char (point-min))
         (delete-region (point) (progn (end-of-line) (point)))
-        (insert (format (format "%%%ds" maxcol) version))))))
+        (insert (format (format "%%%ds"
+                                spacemacs-buffer--window-width)
+                        version))))))
 
 (defun spacemacs-buffer//insert-footer ()
   (save-excursion
-    (let* ((maxcol spacemacs-buffer--banner-length)
-           (badge-path spacemacs-badge-official-png)
+    (let* ((badge-path spacemacs-badge-official-png)
            (badge (when (and (display-graphic-p)
                              (image-type-available-p
                               (intern (file-name-extension badge-path))))
@@ -250,17 +250,16 @@ buffer, right justified."
         (spacemacs-buffer/insert-page-break)
         (insert "\n")
         (when badge
-          (insert (make-string (floor (/ (- maxcol badge-size) 2)) ?\ ))
-          (insert-image badge))
+          (insert-image badge)
+          (spacemacs-buffer//center-line badge-size))
         (when heart
           (when badge (insert "\n\n"))
-          (insert (make-string (floor (/ (- maxcol
-                                            (length build-lhs)
-                                            heart-size
-                                            (length build-rhs)) 2)) ?\ ))
           (insert build-lhs)
           (insert-image heart)
           (insert build-rhs)
+          (spacemacs-buffer//center-line (+ (length build-lhs)
+                                            heart-size
+                                            (length build-rhs)))
           (insert "\n"))))))
 
 (defun spacemacs-buffer//insert-note (file caption &optional additional-widgets)
@@ -566,11 +565,19 @@ border."
                           '((forward-line 1)))
                       (back-to-indentation))))
 
-(defun spacemacs-buffer//center-line ()
-  (let* ((width (current-column))
-         (margin (max 0 (floor (/ (- spacemacs-buffer--banner-length width) 2)))))
+(defun spacemacs-buffer//center-line (&optional real-width)
+  "When point is at the end of a line, center it.
+REAL-WIDTH: the real width of the line.  If the line contains an image, the size
+            of that image will be considered to be 1 by the calculation method
+            used in this function.  As a consequence, the caller must calculate
+            himself the correct length of the line taking into account the
+            images he inserted in it."
+  (let* ((width (or real-width (current-column)))
+         (margin (max 0 (floor (/ (- spacemacs-buffer--window-width
+                                     width)
+                                  2)))))
     (beginning-of-line)
-    (insert (make-string margin ?\ ))
+    (insert (make-string margin ?\s))
     (end-of-line)))
 
 (defun spacemacs-buffer//insert-buttons ()
@@ -959,8 +966,10 @@ already exist, and switch to it."
     (when (or (not (eq spacemacs-buffer--last-width (window-width)))
               (not buffer-exists)
               refresh)
-      (setq spacemacs-buffer--banner-length (window-width)
-            spacemacs-buffer--last-width spacemacs-buffer--banner-length)
+      (setq spacemacs-buffer--window-width (if dotspacemacs-startup-buffer-responsive
+                                               (window-width)
+                                             80)
+            spacemacs-buffer--last-width spacemacs-buffer--window-width)
       (with-current-buffer (get-buffer-create spacemacs-buffer-name)
         (page-break-lines-mode)
         (save-excursion
