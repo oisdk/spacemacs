@@ -1,6 +1,6 @@
 ;;; packages.el --- Haskell Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -12,7 +12,6 @@
 (setq haskell-packages
   '(
     cmm-mode
-    company
     (company-cabal :toggle (configuration-layer/package-usedp 'company))
     company-ghci
     company-ghc
@@ -33,19 +32,12 @@
   (use-package cmm-mode
     :defer t))
 
-(defun haskell/post-init-company ()
-  (spacemacs|add-company-hook haskell-mode)
-  (spacemacs|add-company-hook haskell-cabal-mode)
-  (when (eq haskell-completion-backend 'intero)
-    (spacemacs|add-company-hook intero-repl-mode)))
-
 (defun haskell/init-company-cabal ()
   (use-package company-cabal
-    :if (configuration-layer/package-usedp 'company)
     :defer t
-    :init
-    (push '(company-cabal)
-          company-backends-haskell-cabal-mode)))
+    :init (spacemacs|add-company-backends
+            :backends company-cabal
+            :modes haskell-cabal-mode)))
 
 (defun haskell/init-company-ghci ()
   (use-package company-ghci
@@ -252,8 +244,9 @@
 (defun haskell/init-haskell-snippets ()
   ;; manually load the package since the current implementation is not lazy
   ;; loading friendly (funny coming from the haskell mode :-))
-  (setq haskell-snippets-dir (spacemacs//get-package-directory
-                              'haskell-snippets))
+  (setq haskell-snippets-dir
+        (configuration-layer/get-elpa-package-install-directory
+         'haskell-snippets))
 
   (defun haskell-snippets-initialize ()
     (let ((snip-dir (expand-file-name "snippets" haskell-snippets-dir)))

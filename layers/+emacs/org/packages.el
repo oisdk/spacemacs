@@ -1,6 +1,6 @@
 ;;; packages.el --- Org Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -38,11 +38,10 @@
     ))
 
 (defun org/post-init-company ()
-  (spacemacs|add-company-hook org-mode)
-  (push 'company-capf company-backends-org-mode))
+  (spacemacs|add-company-backends :backends company-capf :modes org-mode))
 
 (defun org/post-init-company-emoji ()
-  (push 'company-emoji company-backends-org-mode))
+  (spacemacs|add-company-backends :backends company-emoji :modes org-mode))
 
 (defun org/post-init-emoji-cheat-sheet-plus ()
   (add-hook 'org-mode-hook 'spacemacs/delay-emoji-cheat-sheet-hook))
@@ -254,6 +253,7 @@ Will work on both org-mode and any mode that accepts plain html."
         "s" 'org-schedule
 
         ;; insertion of common elements
+        "ia" 'org-attach
         "il" 'org-insert-link
         "if" 'org-footnote-new
         "ik" 'spacemacs/insert-keybinding-org

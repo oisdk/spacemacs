@@ -1,6 +1,6 @@
 ;;; core-spacemacs-buffer.el --- Spacemacs Core File
 ;;
-;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -141,11 +141,17 @@ Cate special text banner can de reachable via `998', `cat' or `random*'.
    ((or (not spacemacs-buffer--release-note-version)
         (version< spacemacs-buffer--release-note-version
                   spacemacs-version))
+<<<<<<< HEAD
     ;; check the variable ;; spacemacs-buffer--release-note-version
     ;; to decide whether ;; we show the release note
     (spacemacs-buffer/toggle-note
      (concat spacemacs-release-notes-directory
              spacemacs-buffer-version-info ".txt") 'release-note)))
+=======
+    ;; check the variable spacemacs-buffer--release-note-version
+    ;; to decide whether we show the release note
+    (spacemacs-buffer/toggle-note 'release-note)))
+>>>>>>> syl20bnr/develop
   (spacemacs//redisplay))
 
 (defun spacemacs-buffer//choose-banner ()
@@ -430,8 +436,8 @@ The message is always displayed. "
     (goto-char (point-max))
     (let ((buffer-read-only nil))
       (insert msg)
-      (if messagebuf (message "(Spacemacs) %s" msg)))
-    (spacemacs-buffer/set-mode-line "")))
+      (when messagebuf
+        (message "(Spacemacs) %s" msg)))))
 
 (defun spacemacs-buffer/replace-last-line (msg &optional messagebuf)
   "Replace the last line of the spacemacs buffer with MSG. If MESSAGEBUF is
@@ -441,8 +447,8 @@ The message is always displayed. "
     (let ((buffer-read-only nil))
       (delete-region (line-beginning-position) (point-max))
       (insert msg)
-      (if messagebuf (message "(Spacemacs) %s" msg)))
-    (spacemacs-buffer/set-mode-line "")))
+      (when messagebuf
+        (message "(Spacemacs) %s" msg)))))
 
 (defun spacemacs-buffer/insert-framed-text
     (msg &optional caption hpadding)
@@ -981,6 +987,7 @@ already exist, and switch to it."
           ;; needed in case the buffer was deleted and we are recreating it
           (setq spacemacs-buffer--note-widgets nil)
           (spacemacs-buffer/insert-banner-and-buttons)
+<<<<<<< HEAD
           ;; non-nil if emacs-startup-hook was run
           (if (bound-and-true-p spacemacs-initialized)
               (progn
@@ -992,6 +999,17 @@ already exist, and switch to it."
                 (force-mode-line-update)
                 (spacemacs-buffer-mode))
             (add-hook 'emacs-startup-hook 'spacemacs-buffer//startup-hook t))))
+=======
+          (when (bound-and-true-p spacemacs-initialized)
+            (spacemacs-buffer//notes-redisplay-current-note)
+            (configuration-layer/display-summary emacs-start-time)
+            (when dotspacemacs-startup-lists
+              (spacemacs-buffer/insert-startup-lists))
+            (spacemacs-buffer//insert-footer)
+            (spacemacs-buffer/set-mode-line spacemacs--default-mode-line)
+            (force-mode-line-update)
+            (spacemacs-buffer-mode))))
+>>>>>>> syl20bnr/develop
       (if save-line
           (progn (goto-char (point-min))
                  (forward-line (1- save-line))

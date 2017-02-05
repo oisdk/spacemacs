@@ -1,6 +1,6 @@
 ;;; core-dotspacemacs.el --- Spacemacs Core File
 ;;
-;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -99,6 +99,10 @@ a layer lazily.")
 wrapped in a layer. If you need some configuration for these
 packages then consider to create a layer, you can also put the
 configuration in `dotspacemacs/user-config'.")
+
+(defvar dotspacemacs--additional-theme-packages '()
+  "Same as `dotspacemacs-additonal-packages' but reserved for themes declared
+in `dotspacemacs-themes'.")
 
 (defvar dotspacemacs-editing-style 'vim
   "One of `vim', `emacs' or `hybrid'.

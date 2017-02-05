@@ -1,6 +1,6 @@
 ;;; packages.el --- restclient Layer Packages File
 ;;
-;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -10,6 +10,10 @@
 ;;; License: GPLv3
 (setq restclient-packages
       '(
+<<<<<<< HEAD
+=======
+        (company-restclient :toggle (configuration-layer/package-usedp 'company))
+>>>>>>> syl20bnr/develop
         golden-ratio
         ob-http
         restclient
@@ -40,3 +44,18 @@
         "r" 'restclient-http-send-current-raw-stay-in-window
         "R" 'restclient-http-send-current-raw
         "y" 'restclient-copy-curl-command))))
+<<<<<<< HEAD
+=======
+
+(defun restclient/init-company-restclient ()
+  (use-package company-restclient
+    :defer t
+    :init (spacemacs|add-company-backends
+            :backends company-restclient
+            :modes restclient-mode)))
+
+(defun restclient/init-restclient-helm ()
+  (use-package restclient-helm
+    :init (spacemacs/set-leader-keys-for-major-mode 'restclient-mode
+            "ji" 'helm-restclient)))
+>>>>>>> syl20bnr/develop

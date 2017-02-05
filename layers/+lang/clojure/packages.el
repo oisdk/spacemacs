@@ -165,12 +165,19 @@
           "tl" 'spacemacs/cider-test-run-loaded-tests
           "tp" 'spacemacs/cider-test-run-project-tests
           "tn" 'spacemacs/cider-test-run-ns-tests
-          "tr" 'spacemacs/cider-test-rerun-tests
+          "tr" 'spacemacs/cider-test-rerun-failed-tests
           "tt" 'spacemacs/cider-test-run-focused-test
 
           "db" 'cider-debug-defun-at-point
           "de" 'spacemacs/cider-display-error-buffer
-          "di" 'cider-inspect))
+          "di" 'cider-inspect
+
+          ;; refactorings from clojure-mode
+          "rc{" 'clojure-convert-collection-to-map
+          "rc(" 'clojure-convert-collection-to-list
+          "rc'" 'clojure-convert-collection-to-quoted-list
+          "rc#" 'clojure-convert-collection-to-set
+          "rc[" 'clojure-convert-collection-to-vector))
 
       ;; cider-repl-mode only
       (spacemacs/set-leader-keys-for-major-mode 'cider-repl-mode
@@ -206,7 +213,7 @@
       (setq clj-refactor--key-binding-prefixes
             '(("mr" . "refactor")
               ("mra" . "add")
-              ("mrc" . "cycle/clean")
+              ("mrc" . "cycle/clean/convert")
               ("mrd" . "destructure")
               ("mre" . "extract/expand")
               ("mrf" . "find/function")
@@ -275,10 +282,11 @@
   (add-hook 'cider-mode-hook 'subword-mode))
 
 (defun clojure/post-init-company ()
-  (push 'company-capf company-backends-cider-mode)
-  (spacemacs|add-company-hook cider-mode)
-  (push 'company-capf company-backends-cider-repl-mode)
-  (spacemacs|add-company-hook cider-repl-mode))
+  (spacemacs|add-company-backends
+    :backends company-capf
+    :modes
+    cider-mode
+    cider-repl-mode))
 
 (defun clojure/post-init-ggtags ()
   (add-hook 'clojure-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
