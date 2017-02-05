@@ -26,6 +26,9 @@
             :backends company-glsl
             :modes glsl-mode)))
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> syl20bnr/develop
+=======
 >>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop

@@ -12,7 +12,10 @@
       '(
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop
         (company-restclient :toggle (configuration-layer/package-usedp 'company))
@@ -49,7 +52,10 @@
         "y" 'restclient-copy-curl-command))))
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop
 

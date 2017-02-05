@@ -817,6 +817,9 @@ A non-nil argument sorts in reverse order."
 (defun spacemacs/sort-lines-reverse ()
   "Sort lines in reverse order, in a region or the current buffer."
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> syl20bnr/develop
   (interactive)
   (spacemacs/sort-lines -1))
 
@@ -831,6 +834,7 @@ A non-nil argument sorts in reverse order."
 
 (defun spacemacs/sort-lines-by-column-reverse ()
   "Sort lines by the selected column in reverse order."
+<<<<<<< HEAD
   (interactive)
 =======
   (interactive)
@@ -847,6 +851,9 @@ A non-nil argument sorts in reverse order."
 
 (defun spacemacs/sort-lines-by-column-reverse ()
   "Sort lines by the selected column in reverse order."
+  (interactive)
+>>>>>>> syl20bnr/develop
+=======
   (interactive)
 >>>>>>> syl20bnr/develop
   (spacemacs/sort-lines-by-column -1))
