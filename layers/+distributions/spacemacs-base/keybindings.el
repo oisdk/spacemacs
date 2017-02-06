@@ -125,11 +125,7 @@
   "bn"    'next-buffer
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
   "bm"    'spacemacs/kill-other-buffers
-=======
-  "bm"    'spacemacs/switch-to-messages-buffer
->>>>>>> syl20bnr/develop
 =======
   "bm"    'spacemacs/switch-to-messages-buffer
 >>>>>>> syl20bnr/develop

@@ -143,15 +143,12 @@ Cate special text banner can de reachable via `998', `cat' or `random*'.
                   spacemacs-version))
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
     ;; check the variable ;; spacemacs-buffer--release-note-version
     ;; to decide whether ;; we show the release note
     (spacemacs-buffer/toggle-note
      (concat spacemacs-release-notes-directory
              spacemacs-buffer-version-info ".txt") 'release-note)))
 =======
-=======
->>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop
     ;; check the variable spacemacs-buffer--release-note-version
@@ -456,7 +453,6 @@ The message is always displayed. "
       (when messagebuf
         (message "(Spacemacs) %s" msg)))))
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 (defun spacemacs-buffer/insert-framed-text
     (msg &optional caption hpadding)
@@ -545,8 +541,6 @@ border."
       (concat "│" (make-string hpadding ?\s)
               line (make-string fill ?\s)
               (make-string hpadding ?\s) "│\n"))))
-=======
->>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop
 
@@ -1001,7 +995,6 @@ already exist, and switch to it."
           (spacemacs-buffer/insert-banner-and-buttons)
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
           ;; non-nil if emacs-startup-hook was run
           (if (bound-and-true-p spacemacs-initialized)
               (progn
@@ -1016,8 +1009,6 @@ already exist, and switch to it."
 =======
 =======
 >>>>>>> syl20bnr/develop
-=======
->>>>>>> syl20bnr/develop
           (when (bound-and-true-p spacemacs-initialized)
             (spacemacs-buffer//notes-redisplay-current-note)
             (configuration-layer/display-summary emacs-start-time)
@@ -1028,9 +1019,6 @@ already exist, and switch to it."
             (force-mode-line-update)
             (spacemacs-buffer-mode))))
 <<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> syl20bnr/develop
-=======
 >>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop

@@ -32,9 +32,6 @@ used.")
 (defvar org-enable-org-journal-support nil
   "If non-nil org-journal is configured.")
 <<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> syl20bnr/develop
-=======
 >>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop

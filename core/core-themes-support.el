@@ -180,7 +180,6 @@ package name does not match theme name + `-theme' suffix.")
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 (defun spacemacs/load-theme (theme)
   "Load THEME."
   ;; Required dependencies for some themes
@@ -228,8 +227,6 @@ package name does not match theme name + `-theme' suffix.")
     (eval `(spacemacs|do-after-display-system-init
             (load-theme ',theme t)))))
 =======
-=======
->>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop
 (defun spacemacs//get-theme-name (theme)
@@ -313,9 +310,6 @@ THEME."
       (eval `(spacemacs|do-after-display-system-init
               (load-theme ',theme-name t))))))
 <<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> syl20bnr/develop
-=======
 >>>>>>> syl20bnr/develop
 =======
 >>>>>>> syl20bnr/develop
