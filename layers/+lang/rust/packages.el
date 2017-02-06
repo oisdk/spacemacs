@@ -1,6 +1,6 @@
 ;;; packages.el --- Rust Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
 ;; Author: Chris Hoeppner <me@mkaito.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -72,10 +72,11 @@
     :mode "/\\(Cargo.lock\\|\\.cargo/config\\)\\'"))
 
 (defun rust/post-init-company ()
-  (spacemacs|add-company-backends
-    :backends company-capf
-    :modes rust-mode
-    :variables company-tooltip-align-annotations t))
+  (push 'company-capf company-backends-rust-mode)
+  (spacemacs|add-company-hook rust-mode)
+  (add-hook 'rust-mode-hook
+            (lambda ()
+              (setq-local company-tooltip-align-annotations t))))
 
 (defun rust/post-init-smartparens ()
   (with-eval-after-load 'smartparens

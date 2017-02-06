@@ -1,24 +1,21 @@
 (setq nixos-packages
       '(
         company
-        (company-nixos-options :toggle
-                               (configuration-layer/package-usedp 'company))
+        (company-nixos-options :toggle (configuration-layer/package-usedp 'company))
         (helm-nixos-options :toggle (configuration-layer/package-usedp 'helm))
         nix-mode
         nixos-options
         ))
 
 (defun nixos/post-init-company ()
-  (let ((backends '(company-capf)))
-    (when (configuration-layer/package-usedp 'company-nixos-options)
-      (add-to-list 'backends 'company-nixos-options t))
-    (eval `(spacemacs|add-company-backends
-             :backends ,backends
-             :modes nix-mode))))
+  (spacemacs|add-company-hook nix-mode)
+  (push 'company-capf company-backends-nix-mode))
 
 (defun nixos/init-company-nixos-options ()
   (use-package company-nixos-options
-    :defer t))
+    :defer t
+    :init
+    (push 'company-nixos-options company-backends-nix-mode)))
 
 (defun nixos/init-helm-nixos-options ()
   (use-package helm-nixos-options

@@ -42,8 +42,13 @@
 
 (defun ivy-spacemacs-help//init (&optional arg)
   (when (or arg (null ivy-spacemacs--initialized))
-    (configuration-layer/make-all-packages)
-    (setq ivy-spacemacs--initialized t)))
+    (let ((configuration-layer--load-packages-files t)
+          (configuration-layer--package-properties-read-onlyp t)
+          (configuration-layer--inhibit-warnings t))
+      (configuration-layer/discover-layers)
+      (configuration-layer/declare-layers (configuration-layer/get-layers-list))
+      (configuration-layer/make-all-packages)
+      (setq ivy-spacemacs--initialized t))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Docs

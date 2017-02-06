@@ -1,6 +1,6 @@
 ;;; packages.el --- Elixir Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -16,7 +16,6 @@
     elixir-mode
     flycheck
     flycheck-mix
-    flycheck-credo
     ggtags
     helm-gtags
     ob-elixir
@@ -25,10 +24,8 @@
     ))
 
 (defun elixir/post-init-company ()
-  (when (configuration-layer/package-usedp 'alchemist)
-    (spacemacs|add-company-backends
-      :backends alchemist-company
-      :modes elixir-mode alchemist-iex-mode)))
+  (spacemacs|add-company-hook elixir-mode)
+  (spacemacs|add-company-hook alchemist-iex-mode))
 
 (defun elixir/init-alchemist ()
   (use-package alchemist
@@ -39,6 +36,9 @@
       (add-hook 'elixir-mode-hook 'alchemist-mode)
       (setq alchemist-project-compile-when-needed t
             alchemist-test-status-modeline nil)
+      ;; setup company backends
+      (push 'alchemist-company company-backends-elixir-mode)
+      (push 'alchemist-company company-backends-alchemist-iex-mode)
       (add-to-list 'spacemacs-jump-handlers-elixir-mode
                 'alchemist-goto-definition-at-point))
     :config
@@ -131,11 +131,6 @@
       (add-hook 'elixir-mode-local-vars-hook
                 'spacemacs//elixir-enable-compilation-checking))))
 
-(defun elixir/init-flycheck-credo ()
-  (use-package flycheck-credo
-    :defer t
-    :init (add-hook 'flycheck-mode-hook #'flycheck-credo-setup)))
-
 (defun elixir/init-elixir-mode ()
   (use-package elixir-mode
     :defer t))
@@ -165,11 +160,8 @@
     (progn
       (sp-with-modes '(elixir-mode)
         (sp-local-pair
-         "(" ")"
-         :unless '(:add spacemacs//elixir-point-after-fn-p))
-        (sp-local-pair
-         "fn" "end"
-         :when '(("SPC" "RET" "-" "("))
+         "->" "end"
+         :when '(("RET"))
          :post-handlers '(:add spacemacs//elixir-do-end-close-action)
          :actions '(insert)))
       (sp-with-modes '(elixir-mode)

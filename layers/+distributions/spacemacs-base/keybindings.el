@@ -1,6 +1,6 @@
 ;;; keybindings.el --- Spacemacs Base Layer key-bindings File
 ;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -35,7 +35,6 @@
                                        ("kD"  "delete-backward")
                                        ("k`"  "hybrid")
                                        ("n"   "narrow/numbers")
-                                       ("N"   "navigation")
                                        ("p"   "projects")
                                        ("p$"  "projects/shell")
                                        ("q"   "quit")
@@ -123,11 +122,7 @@
   "bh"    'spacemacs/home
   "b C-d" 'spacemacs/kill-matching-buffers-rudely
   "bn"    'next-buffer
-<<<<<<< HEAD
   "bm"    'spacemacs/kill-other-buffers
-=======
-  "bm"    'spacemacs/switch-to-messages-buffer
->>>>>>> syl20bnr/develop
   "bN"    'spacemacs/new-empty-buffer
   "bP"    'spacemacs/copy-clipboard-to-whole-buffer
   "bp"    'previous-buffer
@@ -370,7 +365,6 @@
     (golden-ratio)))
 
 (spacemacs/set-leader-keys
-  "w TAB"  'spacemacs/alternate-window
   "w2"  'spacemacs/layout-double-columns
   "w3"  'spacemacs/layout-triple-columns
   "wb"  'spacemacs/switch-to-minibuffer-window
@@ -436,11 +430,8 @@
   "xjl" 'set-justification-left
   "xjn" 'set-justification-none
   "xjr" 'set-justification-right
-  "xlc" 'spacemacs/sort-lines-by-column
-  "xlC" 'spacemacs/sort-lines-by-column-reverse
   "xld" 'spacemacs/duplicate-line-or-region
   "xls" 'spacemacs/sort-lines
-  "xlS" 'spacemacs/sort-lines-reverse
   "xlu" 'spacemacs/uniquify-lines
   "xtc" 'transpose-chars
   "xtl" 'transpose-lines
@@ -468,44 +459,12 @@
 
 (spacemacs|define-transient-state buffer
   :title "Buffer Selection Transient State"
-  :doc (concat "
- [_C-1_.._C-9_] goto nth window            [_n_]^^   next buffer
- [_1_.._9_]     move buffer to nth window  [_N_/_p_] previous buffer
- [_M-1_.._M-9_] swap buffer w/ nth window  [_d_]^^   kill buffer
- ^^^^                                      [_q_]^^   quit")
   :bindings
-  ("n" next-buffer)
-  ("N" previous-buffer)
-  ("p" previous-buffer)
-  ("d" spacemacs/kill-this-buffer)
-  ("q" nil :exit t)
-  ("1" move-buffer-window-no-follow-1)
-  ("2" move-buffer-window-no-follow-2)
-  ("3" move-buffer-window-no-follow-3)
-  ("4" move-buffer-window-no-follow-4)
-  ("5" move-buffer-window-no-follow-5)
-  ("6" move-buffer-window-no-follow-6)
-  ("7" move-buffer-window-no-follow-7)
-  ("8" move-buffer-window-no-follow-8)
-  ("9" move-buffer-window-no-follow-9)
-  ("M-1" swap-buffer-window-no-follow-1)
-  ("M-2" swap-buffer-window-no-follow-2)
-  ("M-3" swap-buffer-window-no-follow-3)
-  ("M-4" swap-buffer-window-no-follow-4)
-  ("M-5" swap-buffer-window-no-follow-5)
-  ("M-6" swap-buffer-window-no-follow-6)
-  ("M-7" swap-buffer-window-no-follow-7)
-  ("M-8" swap-buffer-window-no-follow-8)
-  ("M-9" swap-buffer-window-no-follow-9)
-  ("C-1" winum-select-window-1)
-  ("C-2" winum-select-window-2)
-  ("C-3" winum-select-window-3)
-  ("C-4" winum-select-window-4)
-  ("C-5" winum-select-window-5)
-  ("C-6" winum-select-window-6)
-  ("C-7" winum-select-window-7)
-  ("C-8" winum-select-window-8)
-  ("C-9" winum-select-window-9))
+  ("n" next-buffer "next")
+  ("N" previous-buffer "previous")
+  ("p" previous-buffer "previous")
+  ("K" spacemacs/kill-this-buffer "kill")
+  ("q" nil "quit" :exit t))
 (spacemacs/set-leader-keys "b." 'spacemacs/buffer-transient-state/body)
 
 ;; end of Buffer transient state
@@ -535,29 +494,28 @@
 (spacemacs|define-transient-state window-manipulation
   :title "Window Manipulation Transient State"
   :doc (concat "
- Select^^^^               Move^^^^              Split^^               Resize^^             Other^^
- ──────^^^^─────────────  ────^^^^────────────  ─────^^─────────────  ──────^^───────────  ─────^^──────────────────
- [_j_/_k_]  down/up       [_J_/_K_] down/up     [_s_] vertical        [_[_] shrink horiz   [_u_] restore prev layout
- [_h_/_l_]  left/right    [_H_/_L_] left/right  [_S_] verti & follow  [_]_] enlarge horiz  [_U_] restore next layout
- [_0_.._9_] window 0..9   [_r_]^^   rotate fwd  [_v_] horizontal      [_{_] shrink verti   [_d_] close current
- [_w_]^^    other window  [_R_]^^   rotate bwd  [_V_] horiz & follow  [_}_] enlarge verti  [_D_] close other
- [_o_]^^    other frame   ^^^^                  ^^                    ^^                   "
+ Select^^^^              Move^^^^              Split^^                Resize^^                     Other^^
+ ──────^^^^───────────── ────^^^^───────────── ─────^^─────────────── ──────^^──────────────────── ─────^^──────────────────────────────
+ [_j_/_k_] down/up       [_J_/_K_] down/up     [_s_] vertical         [_[_] shrink horizontally    [_q_] quit
+ [_h_/_l_] left/right    [_H_/_L_] left/right  [_S_] vert & follow    [_]_] enlarge horizontally   [_u_] restore prev layout
+ [_0_-_9_] window N      [_r_]^^   rotate fwd  [_v_] horizontal       [_{_] shrink vertically      [_U_] restore next layout
+ [_w_]^^   other window  [_R_]^^   rotate bwd  [_V_] horiz & follow   [_}_] enlarge vertically     [_d_] close current
+ [_o_]^^   other frame   ^^^^                  ^^                     ^^                           [_D_] close other"
                (if (configuration-layer/package-usedp 'golden-ratio)
-                   "[_g_] golden-ratio %`golden-ratio-mode"
-                 "")
-               "\n ^^^^                     ^^^^                  ^^                    ^^                   [_q_] quit")
+                   "\n ^^^^                    ^^^^                  ^^                     ^^                           [_g_] golden-ratio %`golden-ratio-mode"
+                 ""))
   :bindings
   ("q" nil :exit t)
-  ("0" winum-select-window-0)
-  ("1" winum-select-window-1)
-  ("2" winum-select-window-2)
-  ("3" winum-select-window-3)
-  ("4" winum-select-window-4)
-  ("5" winum-select-window-5)
-  ("6" winum-select-window-6)
-  ("7" winum-select-window-7)
-  ("8" winum-select-window-8)
-  ("9" winum-select-window-9)
+  ("0" select-window-0)
+  ("1" select-window-1)
+  ("2" select-window-2)
+  ("3" select-window-3)
+  ("4" select-window-4)
+  ("5" select-window-5)
+  ("6" select-window-6)
+  ("7" select-window-7)
+  ("8" select-window-8)
+  ("9" select-window-9)
   ("-" split-window-below-and-focus)
   ("/" split-window-right-and-focus)
   ("[" spacemacs/shrink-window-horizontally)

@@ -1,6 +1,6 @@
 ;;; funcs.el --- Haskell Layer funcs File for Spacemacs
 ;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -20,14 +20,12 @@
       (`intero (spacemacs-haskell//setup-intero)))))
 
 (defun spacemacs-haskell//setup-ghci ()
-  (spacemacs|add-company-backends
-    :backends (company-ghci company-dabbrev-code company-yasnippet)
-    :modes haskell-mode))
+  (add-to-list 'company-backends-haskell-mode
+               '(company-ghci company-dabbrev-code company-yasnippet)))
 
 (defun spacemacs-haskell//setup-ghc-mod ()
-  (spacemacs|add-company-backends
-    :backends (company-ghc company-dabbrev-code company-yasnippet)
-    :modes haskell-mode)
+  (add-to-list 'company-backends-haskell-mode
+               '(company-ghc company-dabbrev-code company-yasnippet))
   (ghc-init)
   (dolist (mode haskell-modes)
     (spacemacs/declare-prefix-for-mode mode "mm" "haskell/ghc-mod")
@@ -49,9 +47,8 @@
     (set-face-attribute 'ghc-face-warn nil :underline nil)))
 
 (defun spacemacs-haskell//setup-intero ()
-  (spacemacs|add-company-backends
-    :backends (company-intero company-dabbrev-code company-yasnippet)
-    :modes haskell-mode)
+  (add-to-list 'company-backends-haskell-mode
+               '(company-intero company-dabbrev-code company-yasnippet))
   (push 'intero-goto-definition spacemacs-jump-handlers)
   (intero-mode)
   (dolist (mode haskell-modes)

@@ -1,6 +1,6 @@
 ;;; funcs.el --- Spacemacs Bootstrap Layer functions File
 ;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -43,16 +43,6 @@
 
 (defun evil-insert-state-cursor-hide ()
   (setq evil-insert-state-cursor '((hbar . 0))))
-
-(defun spacemacs/set-evil-search-module (style)
-  "Set the evil search module depending on STYLE."
-  (cond
-   ((or (eq 'vim style)
-        (and (eq 'hybrid style)
-             hybrid-mode-use-evil-search-module))
-    (setq-default evil-search-module 'evil-search))
-   (t
-    (setq-default evil-search-module 'isearch))))
 
 (defun spacemacs/evil-smart-doc-lookup ()
   "Version of `evil-lookup' that attempts to use

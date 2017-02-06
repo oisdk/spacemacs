@@ -13,8 +13,7 @@
 
 * Description
 
-This layer adds [[https://github.com/abingham/emacs-ycmd][emacs-ycmd]] support, including its integrations with company,
-flycheck, and eldoc.
+This layer adds [[https://github.com/abingham/emacs-ycmd][emacs-ycmd]] support.
 
 * Install
 ** Layer

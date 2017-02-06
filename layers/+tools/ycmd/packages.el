@@ -1,19 +1,7 @@
-;;; packages.el --- Ycmd Layer packages File for Spacemacs
-;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
-;;
-;; Author: Brian Hicks <brian@brianthicks.com>
-;; URL: https://github.com/syl20bnr/spacemacs
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
-
 (setq ycmd-packages
   '(
     (company-ycmd :toggle (configuration-layer/package-usedp 'company))
     (flycheck-ycmd :toggle (configuration-layer/package-usedp 'flycheck))
-    eldoc
     ycmd
     ))
 
@@ -30,9 +18,6 @@
   (use-package flycheck-ycmd
     :defer t
     :init (add-hook 'ycmd-mode-hook 'flycheck-ycmd-setup)))
-
-(defun ycmd/post-init-eldoc ()
-  (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup))
 
 (defun ycmd/init-ycmd ()
   (use-package ycmd

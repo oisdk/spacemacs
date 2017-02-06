@@ -1,16 +1,6 @@
-;;; packages.el --- Go Layer packages File for Spacemacs
-;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
-;;
-;; Author: Sylvain Benner <sylvain.benner@gmail.com>
-;; URL: https://github.com/syl20bnr/spacemacs
-;;
-;; This file is not part of GNU Emacs.
-;;
-;;; License: GPLv3
-
 (setq go-packages
       '(
+        company
         (company-go :toggle (configuration-layer/package-usedp 'company))
         flycheck
         (flycheck-gometalinter :toggle (and go-use-gometalinter
@@ -25,14 +15,16 @@
         ))
 
 
+(defun go/post-init-company ()
+  (spacemacs|add-company-hook go-mode))
+
 (defun go/init-company-go ()
   (use-package company-go
     :defer t
     :init
-    (spacemacs|add-company-backends
-      :backends company-go
-      :modes go-mode
-      :variables company-go-show-annotation t)))
+    (progn
+      (setq company-go-show-annotation t)
+      (push 'company-go company-backends-go-mode))))
 
 (defun go/post-init-flycheck ()
   (spacemacs/add-flycheck-hook 'go-mode))
