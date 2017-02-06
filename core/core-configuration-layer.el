@@ -1169,13 +1169,7 @@ Returns nil if the directory is not a category."
                       ;; the same layer may have been discovered twice,
                       ;; in which case we don't need a warning
 <<<<<<< HEAD
-<<<<<<< HEAD
                       (unless (string-equal (oref indexed-layer :dir) sub)
-=======
-                      (unless (string-equal
-                               (directory-file-name (oref indexed-layer :dir))
-                               (directory-file-name sub))
->>>>>>> syl20bnr/develop
 =======
                       (unless (string-equal
                                (directory-file-name (oref indexed-layer :dir))

@@ -1,6 +1,6 @@
 ;;; packages.el --- Markdown Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
+;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
 ;; Author: Sylvain Benner <sylvain.benner@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
@@ -23,12 +23,11 @@
     ))
 
 (defun markdown/post-init-company ()
-  (spacemacs|add-company-backends :backends company-capf :modes markdown-mode))
+  (spacemacs|add-company-hook markdown-mode)
+  (push 'company-capf company-backends-markdown-mode))
 
 (defun markdown/post-init-company-emoji ()
-  (spacemacs|add-company-backends
-    :backends company-emoji
-    :modes markdown-mode))
+  (push 'company-emoji company-backends-markdown-mode))
 
 (defun markdown/post-init-emoji-cheat-sheet-plus ()
   (add-hook 'markdown-mode-hook 'emoji-cheat-sheet-plus-display-mode))

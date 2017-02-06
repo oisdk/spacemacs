@@ -142,15 +142,12 @@ Cate special text banner can de reachable via `998', `cat' or `random*'.
         (version< spacemacs-buffer--release-note-version
                   spacemacs-version))
 <<<<<<< HEAD
-<<<<<<< HEAD
     ;; check the variable ;; spacemacs-buffer--release-note-version
     ;; to decide whether ;; we show the release note
     (spacemacs-buffer/toggle-note
      (concat spacemacs-release-notes-directory
              spacemacs-buffer-version-info ".txt") 'release-note)))
 =======
-=======
->>>>>>> syl20bnr/develop
     ;; check the variable spacemacs-buffer--release-note-version
     ;; to decide whether we show the release note
     (spacemacs-buffer/toggle-note 'release-note)))
@@ -452,7 +449,6 @@ The message is always displayed. "
       (insert msg)
       (when messagebuf
         (message "(Spacemacs) %s" msg)))))
-<<<<<<< HEAD
 
 (defun spacemacs-buffer/insert-framed-text
     (msg &optional caption hpadding)
@@ -541,8 +537,6 @@ border."
       (concat "│" (make-string hpadding ?\s)
               line (make-string fill ?\s)
               (make-string hpadding ?\s) "│\n"))))
-=======
->>>>>>> syl20bnr/develop
 
 (defun spacemacs-buffer/loading-animation ()
   "Display the progress bar by chunk of size
@@ -994,7 +988,6 @@ already exist, and switch to it."
           (setq spacemacs-buffer--note-widgets nil)
           (spacemacs-buffer/insert-banner-and-buttons)
 <<<<<<< HEAD
-<<<<<<< HEAD
           ;; non-nil if emacs-startup-hook was run
           (if (bound-and-true-p spacemacs-initialized)
               (progn
@@ -1007,8 +1000,6 @@ already exist, and switch to it."
                 (spacemacs-buffer-mode))
             (add-hook 'emacs-startup-hook 'spacemacs-buffer//startup-hook t))))
 =======
-=======
->>>>>>> syl20bnr/develop
           (when (bound-and-true-p spacemacs-initialized)
             (spacemacs-buffer//notes-redisplay-current-note)
             (configuration-layer/display-summary emacs-start-time)
@@ -1018,9 +1009,6 @@ already exist, and switch to it."
             (spacemacs-buffer/set-mode-line spacemacs--default-mode-line)
             (force-mode-line-update)
             (spacemacs-buffer-mode))))
-<<<<<<< HEAD
->>>>>>> syl20bnr/develop
-=======
 >>>>>>> syl20bnr/develop
       (if save-line
           (progn (goto-char (point-min))

@@ -11,10 +11,7 @@
 (setq restclient-packages
       '(
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
-=======
->>>>>>> syl20bnr/develop
         (company-restclient :toggle (configuration-layer/package-usedp 'company))
 >>>>>>> syl20bnr/develop
         golden-ratio
@@ -48,10 +45,7 @@
         "R" 'restclient-http-send-current-raw
         "y" 'restclient-copy-curl-command))))
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
-=======
->>>>>>> syl20bnr/develop
 
 (defun restclient/init-company-restclient ()
   (use-package company-restclient

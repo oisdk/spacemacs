@@ -25,9 +25,6 @@
     :init (spacemacs|add-company-backends
             :backends company-glsl
             :modes glsl-mode)))
-<<<<<<< HEAD
->>>>>>> syl20bnr/develop
-=======
 >>>>>>> syl20bnr/develop
 
 (defun shaders/init-glsl-mode ()

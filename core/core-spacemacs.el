@@ -144,7 +144,6 @@ the final step of executing code in `emacs-startup-hook'.")
     (tooltip-mode -1)))
 
 <<<<<<< HEAD
-<<<<<<< HEAD
 (defun spacemacs/maybe-install-dotfile ()
   "Install the dotfile if it does not exist."
   (unless (file-exists-p dotspacemacs-filepath)
@@ -159,8 +158,6 @@ the final step of executing code in `emacs-startup-hook'.")
   (let ((msg (format "Spacemacs v.%s" spacemacs-version)))
     (message msg) (kill-new msg)))
 =======
-=======
->>>>>>> syl20bnr/develop
 (defun spacemacs//setup-ido-vertical-mode ()
   "Setup `ido-vertical-mode'."
   (require 'ido-vertical-mode)
@@ -176,9 +173,6 @@ the final step of executing code in `emacs-startup-hook'.")
      (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
      (define-key ido-completion-map (kbd "<left>") 'ido-delete-backward-updir)
      (define-key ido-completion-map (kbd "<right>") 'ido-exit-minibuffer))))
-<<<<<<< HEAD
->>>>>>> syl20bnr/develop
-=======
 >>>>>>> syl20bnr/develop
 
 (defun display-startup-echo-area-message ()
